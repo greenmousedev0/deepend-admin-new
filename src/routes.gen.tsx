@@ -67,6 +67,15 @@ const appfoodindex = createRoute({
     createLazyRoute("/app/food")({ component: m.default }),
   ),
 );
+const appfoodid = createRoute({ getParentRoute: () => appfood, path: "$id" });
+const appfoodidindex = createRoute({
+  getParentRoute: () => appfoodid,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/food/[id]/index").then((m) =>
+    createLazyRoute("/app/food/$id")({ component: m.default }),
+  ),
+);
 const index = createRoute({
   getParentRoute: () => root,
   path: "/",
@@ -83,7 +92,10 @@ const config = root.addChildren([
   app.addChildren([
     appusers.addChildren([appusersindex]),
     appindex,
-    appfood.addChildren([appfoodindex]),
+    appfood.addChildren([
+      appfoodindex,
+      appfoodid.addChildren([appfoodidindex]),
+    ]),
   ]),
   index,
   _404,
