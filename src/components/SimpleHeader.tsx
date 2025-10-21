@@ -7,7 +7,7 @@ interface SimpleHeaderProps extends PropsWithChildren {
 
 export default function SimpleHeader(props: SimpleHeaderProps) {
   return (
-    <div className="flex  md:h-18 md:items-center justify-between flex-wrap gap-2">
+    <div className="flex py-2 md:py-0 md:h-18 md:items-center justify-between flex-wrap gap-2">
       <h2 className="font-bold text-xl">{props.title}</h2>
       <div className="flex gap-2">{props.children}</div>
     </div>
