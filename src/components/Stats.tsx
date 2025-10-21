@@ -43,7 +43,7 @@ const stats = [
     main: "+573",
   },
   {
-    title: "Orders",
+    title: "Hotel Bookings",
     color: "#0e7490",
     icon: <ShoppingCart className="h-4 w-4 text-muted-foreground" />,
     subtitle: "+15% from last month",
