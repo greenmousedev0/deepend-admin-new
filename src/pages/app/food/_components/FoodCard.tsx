@@ -3,7 +3,10 @@ import { Link } from "@tanstack/react-router";
 
 export default function FoodCard({ item }: { item: FoodProps }) {
   return (
-    <div key={item.id} className="card card-compact bg-base-100 shadow-xl">
+    <div
+      key={item.id}
+      className="card card-compact bg-base-100 shadow-xl card-border"
+    >
       <figure>
         <img
           src={item.imageUrls[0]?.url || "https://picsum.photos/400/225"}
@@ -14,20 +17,24 @@ export default function FoodCard({ item }: { item: FoodProps }) {
       </figure>
       <div className="card-body p-4">
         <h2 className="card-title text-lg">{item.name}</h2>
-        <p className="text-sm line-clamp-2">{item.description}</p>
-        <div className="flex justify-between items-center mt-2">
-          <span className="text-base font-bold">${item.price}</span>
+        <p className="text-sm line-clamp-2 text-base-content/80">
+          {item.description}
+        </p>
+        <div className="flex justify-between items-center mt-4">
+          <span className="text-lg font-extrabold text-primary">
+            ${item.price}
+          </span>
           <span
-            className={`badge ${item.isAvailable ? "badge-success" : "badge-error"} text-white`}
+            className={`badge ${item.isAvailable ? "badge-success" : "badge-error"} badge-outline`}
           >
             {item.isAvailable ? "Available" : "Unavailable"}
           </span>
         </div>
-        <div className="card-actions justify-end mt-2">
+        <div className="card-actions justify-end mt-4">
           <Link
             to="/app/food/$id"
             params={{ id: item.id }}
-            className="btn btn-primary btn-sm"
+            className="btn btn-primary btn-sm btn-block"
           >
             View Details
           </Link>
