@@ -30,6 +30,10 @@ const dash_links: {
         path: "/app/food/category",
         label: "Food Category",
       },
+      {
+        path: "/app/food/addons",
+        label: "Food Addons",
+      },
     ],
   },
 ];

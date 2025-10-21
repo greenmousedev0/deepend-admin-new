@@ -26,10 +26,12 @@
 
 import axios from "axios";
 import { get_user_value, set_user_value, clear_user } from "@/store/authStore";
+import { toast } from "sonner";
 
 // Create axios instance
 const apiClient = axios.create({
   baseURL: "https://deepend-api.onrender.com/api/v1/",
+  withCredentials: true,
 });
 
 // Attach access token to requests
@@ -101,7 +103,8 @@ apiClient.interceptors.response.use(
       } catch (refreshError) {
         isRefreshing = false;
         clear_user(); // logout
-        window.location.href = "/login"; // or your route
+        toast.info("Session expired. Please login again.", { duration: 1000 });
+        window.location.href = "/auth/login"; // or your route
         return Promise.reject(refreshError);
       }
     }

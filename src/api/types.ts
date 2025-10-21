@@ -38,3 +38,10 @@ export interface FoodCategory {
   createdAt: string;
   updatedAt: string;
 }
+export interface FoodAddon {
+  id: number;
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+}

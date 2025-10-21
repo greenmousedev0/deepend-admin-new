@@ -112,6 +112,30 @@ const appfoodcategoryidindex = createRoute({
     createLazyRoute("/app/food/category/$id")({ component: m.default }),
   ),
 );
+const appfoodaddons = createRoute({
+  getParentRoute: () => appfood,
+  path: "addons",
+});
+const appfoodaddonsnew = createRoute({
+  getParentRoute: () => appfoodaddons,
+  path: "new",
+});
+const appfoodaddonsnewindex = createRoute({
+  getParentRoute: () => appfoodaddonsnew,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/food/addons/new/index").then((m) =>
+    createLazyRoute("/app/food/addons/new")({ component: m.default }),
+  ),
+);
+const appfoodaddonsindex = createRoute({
+  getParentRoute: () => appfoodaddons,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/food/addons/index").then((m) =>
+    createLazyRoute("/app/food/addons")({ component: m.default }),
+  ),
+);
 const appfoodid = createRoute({ getParentRoute: () => appfood, path: "$id" });
 const appfoodidindex = createRoute({
   getParentRoute: () => appfoodid,
@@ -156,6 +180,10 @@ const config = root.addChildren([
         appfoodcategorynew.addChildren([appfoodcategorynewindex]),
         appfoodcategoryindex,
         appfoodcategoryid.addChildren([appfoodcategoryidindex]),
+      ]),
+      appfoodaddons.addChildren([
+        appfoodaddonsnew.addChildren([appfoodaddonsnewindex]),
+        appfoodaddonsindex,
       ]),
       appfoodid.addChildren([
         appfoodidindex,
