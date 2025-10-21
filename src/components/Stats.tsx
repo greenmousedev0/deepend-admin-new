@@ -9,32 +9,34 @@ import {
   BarChart,
   TrendingUp,
   Clock,
+  ForkKnifeCrossedIcon,
+  Verified,
 } from "lucide-react";
 
 const stats = [
   {
     title: "Total Revenue",
     color: "#a16207",
-    icon: <DollarSign className="h-4 w-4 text-muted-foreground" />,
+    icon: <Users className="h-4 w-4 text-muted-foreground" />,
     subtitle: "+20.1% from last month",
     main: "$45,231.89",
   },
   {
     title: "Subscriptions",
     color: "brown",
-    icon: <Users className="h-4 w-4 text-muted-foreground" />,
+    icon: <Verified className="h-4 w-4 text-muted-foreground" />,
     subtitle: "+180.1% from last month",
     main: "+2350",
   },
   {
-    title: "Sales",
+    title: "Food",
     color: "green",
-    icon: <CreditCard className="h-4 w-4 text-muted-foreground" />,
+    icon: <ForkKnifeCrossedIcon className="h-4 w-4 text-muted-foreground" />,
     subtitle: "+19% from last month",
     main: "+12,234",
   },
   {
-    title: "Active Now",
+    title: "Studio Rating",
     color: "#c2410c",
     icon: <Activity className="h-4 w-4 text-muted-foreground" />,
     subtitle: "+201 since last hour",
