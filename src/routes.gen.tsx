@@ -52,6 +52,27 @@ const appusersindex = createRoute({
     createLazyRoute("/app/users")({ component: m.default }),
   ),
 );
+const appstudio = createRoute({ getParentRoute: () => app, path: "studio" });
+const appstudioindex = createRoute({
+  getParentRoute: () => appstudio,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/studio/index").then((m) =>
+    createLazyRoute("/app/studio")({ component: m.default }),
+  ),
+);
+const appstudioall = createRoute({
+  getParentRoute: () => appstudio,
+  path: "all",
+});
+const appstudioallindex = createRoute({
+  getParentRoute: () => appstudioall,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/studio/all/index").then((m) =>
+    createLazyRoute("/app/studio/all")({ component: m.default }),
+  ),
+);
 const appindex = createRoute({ getParentRoute: () => app, path: "/" }).lazy(
   () =>
     import("./pages/app/index").then((m) =>
@@ -128,6 +149,24 @@ const appfoodaddonsnewindex = createRoute({
     createLazyRoute("/app/food/addons/new")({ component: m.default }),
   ),
 );
+const appfoodaddonsitem = createRoute({
+  getParentRoute: () => appfoodaddons,
+  path: "item",
+});
+const appfoodaddonsitemcategoryId = createRoute({
+  getParentRoute: () => appfoodaddonsitem,
+  path: "$categoryId",
+});
+const appfoodaddonsitemcategoryIdindex = createRoute({
+  getParentRoute: () => appfoodaddonsitemcategoryId,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/food/addons/item/[categoryId]/index").then((m) =>
+    createLazyRoute("/app/food/addons/item/$categoryId")({
+      component: m.default,
+    }),
+  ),
+);
 const appfoodaddonsindex = createRoute({
   getParentRoute: () => appfoodaddons,
   path: "/",
@@ -172,6 +211,10 @@ const config = root.addChildren([
   auth.addChildren([authlogin.addChildren([authloginindex])]),
   app.addChildren([
     appusers.addChildren([appusersindex]),
+    appstudio.addChildren([
+      appstudioindex,
+      appstudioall.addChildren([appstudioallindex]),
+    ]),
     appindex,
     appfood.addChildren([
       appfoodnew.addChildren([appfoodnewindex]),
@@ -183,6 +226,11 @@ const config = root.addChildren([
       ]),
       appfoodaddons.addChildren([
         appfoodaddonsnew.addChildren([appfoodaddonsnewindex]),
+        appfoodaddonsitem.addChildren([
+          appfoodaddonsitemcategoryId.addChildren([
+            appfoodaddonsitemcategoryIdindex,
+          ]),
+        ]),
         appfoodaddonsindex,
       ]),
       appfoodid.addChildren([

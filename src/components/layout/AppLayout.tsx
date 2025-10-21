@@ -36,6 +36,15 @@ const dash_links: {
       },
     ],
   },
+  {
+    path: "/app/studio",
+    label: "Studio",
+    type: "submenu",
+    children: [
+      { path: "/app/studio", label: "Studio Bookings" },
+      { path: "/app/studio/all", label: "All Studios" },
+    ],
+  },
 ];
 export default function AppLayout(props: PropsWithChildren) {
   return (

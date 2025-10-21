@@ -23,11 +23,16 @@ export default function index() {
     },
   });
   if (query.isLoading) {
-    return <SimpleLoader />;
+    return (
+      <>
+        <SimpleHeader title={"Food (Orders)"} />
+        <SimpleLoader />
+      </>
+    );
   }
   const items = query.data?.payload;
   return (
-    <div>
+    <>
       <div>
         <SimpleHeader title={"Food (Orders)"}>
           <div>
@@ -43,6 +48,6 @@ export default function index() {
         })}
       </div>
       <SimplePaginator {...props} />
-    </div>
+    </>
   );
 }

@@ -121,6 +121,15 @@ const AddonCard = ({
         </h2>
         <p>{addon.description}</p>
         <div className="ml-auto space-x-2">
+          <Link
+            to={`/app/food/addons/item/$categoryId`}
+            params={{ categoryId: String(addon.id) }}
+            className="btn btn-accent"
+            onClick={showModal}
+            // disabled={isPending}
+          >
+            View Items
+          </Link>
           <button
             className="btn btn-info"
             onClick={showModal}

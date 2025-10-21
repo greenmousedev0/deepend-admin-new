@@ -24,7 +24,12 @@ export default function index() {
   });
 
   if (query.isLoading) {
-    return <SimpleLoader></SimpleLoader>;
+    return (
+      <>
+        <SimpleHeader title={"Food Category"} />
+        <SimpleLoader></SimpleLoader>
+      </>
+    );
   }
   const items = query.data?.payload;
   return (
