@@ -9,6 +9,7 @@ import { extract_message } from "@/helpers/auth";
 import { useModal } from "@/store/modals";
 import { usePagination } from "@/store/pagination";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -128,6 +129,26 @@ export const StudioCard = ({
     },
   });
   const { ref, showModal, closeModal } = useModal();
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async (data: Partial<Studio>) => {
+      if (studio.isAvailable) {
+        let resp = await apiClient.put(
+          `admins/studios/${studio.id}/available`,
+          data,
+        );
+        return resp.data;
+      }
+      let resp = await apiClient.put(
+        `admins/studios/${studio.id}/unavailable`,
+        data,
+      );
+      return resp.data;
+    },
+    onSuccess: () => {
+      refetch();
+    },
+  });
   const onSubmit = (data: Partial<Studio>) => {
     toast.promise(() => edit_mutation.mutateAsync(data), {
       loading: "Editing..." + studio.name,
@@ -143,9 +164,31 @@ export const StudioCard = ({
         <p className="text-lg font-semibold">
           Hourly Rate: ${studio.hourlyRate}
         </p>
-        <div className="card-actions justify-end">
+        <div className="space-x-2">
+          <input
+            onClick={() => {
+              toast.promise(() => mutateAsync({}), {
+                loading: "Updating availability...",
+                success: extract_message,
+                error: extract_message,
+              });
+            }}
+            type="checkbox"
+            className="checkbox checkbox-primary"
+            checked={studio.isAvailable}
+          />
+          <span>Available</span>
+        </div>
+        <div className="card-actions justify-end mt-4">
+          <Link
+            to={"/app/studio/$id"}
+            //@ts-ignore
+            params={{
+              id: studio.id,
+            }}
+          ></Link>
           <button
-            className="btn btn-error"
+            className="btn btn-info"
             onClick={() => {
               showModal();
             }}
@@ -166,13 +209,6 @@ export const StudioCard = ({
           >
             Delete Studio
           </button>
-          {/*<div
-            className={`badge ${
-              studio.isAvailable ? "badge-success" : "badge-error"
-            } text-white`}
-          >
-            {studio.isAvailable ? "Available" : "Not Available"}
-          </div>*/}
         </div>
       </div>
       <Modal ref={ref}>

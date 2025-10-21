@@ -65,3 +65,13 @@ export interface Studio {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface StudioAvailability {
+  id: string;
+  studioId: number;
+  dayOfWeek: number;
+  startTime: string;
+  endTime: string;
+  createdAt: string;
+  updatedAt: string;
+}

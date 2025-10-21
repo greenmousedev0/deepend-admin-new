@@ -7,9 +7,9 @@ interface SimpleHeaderProps extends PropsWithChildren {
 
 export default function SimpleHeader(props: SimpleHeaderProps) {
   return (
-    <div className="h-18 flex items-center ">
-      <h2 className="font-bold text-xl ">{props.title}</h2>{" "}
-      <div className="ml-auto">{props.children}</div>
+    <div className="flex  md:h-18 md:items-center justify-between flex-wrap gap-2">
+      <h2 className="font-bold text-xl">{props.title}</h2>
+      <div className="flex gap-2">{props.children}</div>
     </div>
   );
 }
