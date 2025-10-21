@@ -89,7 +89,7 @@ export default function index() {
   });
 
   const onSubmit = (data: UpdateFoodItemProps) => {
-    toast.promise(updateFoodMutation.mutateAsync(data), {
+    toast.promise(() => updateFoodMutation.mutateAsync(data), {
       loading: "Updating food item...",
       success: extract_message,
       error: extract_message,

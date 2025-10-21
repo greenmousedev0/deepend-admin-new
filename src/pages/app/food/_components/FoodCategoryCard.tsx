@@ -63,14 +63,14 @@ export default function FoodCategoryCard({
     },
   });
   const onsubmit = (data: any) => {
-    toast.promise(edit_mutation.mutateAsync(data), {
+    toast.promise(() => edit_mutation.mutateAsync(data), {
       loading: "Updating category...",
       success: extract_message,
       error: extract_message,
     });
   };
   const handleDelete = () => {
-    toast.promise(delete_mutation.mutateAsync(), {
+    toast.promise(delete_mutation.mutateAsync, {
       loading: "Deleting category...",
       success: extract_message,
       error: extract_message,

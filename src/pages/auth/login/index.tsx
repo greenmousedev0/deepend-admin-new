@@ -12,7 +12,8 @@ export default function index() {
   const form = useForm();
   const onsubmit = (data: any) => {
     console.log(data);
-    toast.promise(mutation.mutateAsync(data), {
+    //@ts-ignore
+    toast.promise(() => mutation.mutateAsync(data), {
       loading: "Logging in...",
       success: extract_message,
       error: extract_message,

@@ -34,7 +34,7 @@ export default function index() {
   });
 
   const onSubmit = (data: UpdateFoodItemProps) => {
-    toast.promise(createFoodMutation.mutateAsync(data), {
+    toast.promise(() => createFoodMutation.mutateAsync(data), {
       loading: "Creating food item...",
       success: extract_message,
       error: extract_message,

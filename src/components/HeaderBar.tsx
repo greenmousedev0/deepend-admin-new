@@ -68,7 +68,7 @@ export default function HeaderBar() {
             <li>
               <a
                 onClick={() => {
-                  toast.promise(logout.mutateAsync(), {
+                  toast.promise(logout.mutateAsync, {
                     loading: "Logging out...",
                     success: extract_message,
                     error: extract_message,
