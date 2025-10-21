@@ -7,6 +7,8 @@ import { useModal } from "@/store/modals";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { uploadToCloudinary } from "@/api/cloud";
+import { useState } from "react";
 
 export default function FoodCategoryCard({
   category,
@@ -35,11 +37,21 @@ export default function FoodCategoryCard({
       icon: category.icon,
     },
   });
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
   const edit_mutation = useMutation({
-    mutationFn: async (data) => {
+    mutationFn: async (data: any) => {
+      let iconUrl = data.icon;
+      if (selectedFile) {
+        //@ts-ignore
+        const uploaded = await uploadToCloudinary([selectedFile] as FileList);
+        if (uploaded.length > 0) {
+          iconUrl = uploaded[0].url;
+        }
+      }
       let resp = await apiClient.put(
         "/admins/foods/categories/" + category.id,
-        data,
+        { ...data, icon: iconUrl },
       );
       return resp.data;
     },
@@ -65,6 +77,19 @@ export default function FoodCategoryCard({
     });
   };
   const { ref, showModal, closeModal } = useModal();
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setSelectedFile(event.target.files[0]);
+      form.setValue("icon", URL.createObjectURL(event.target.files[0])); // Set a temporary URL for preview
+    } else {
+      setSelectedFile(null);
+      form.setValue("icon", category.icon); // Revert to original icon if no file selected
+    }
+  };
+
+  const currentIcon = form.watch("icon");
+
   return (
     <>
       <div key={category.id} className="card bg-base-100 shadow-xl">
@@ -113,6 +138,26 @@ export default function FoodCategoryCard({
               label="Description"
               {...form.register("description")}
             />
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Icon</span>
+              </label>
+              {currentIcon && (
+                <div className="mb-4">
+                  <img
+                    src={currentIcon}
+                    alt="Icon Preview"
+                    className="w-20 h-20 object-cover rounded-md"
+                  />
+                </div>
+              )}
+              <input
+                type="file"
+                className="file-input file-input-bordered w-full"
+                onChange={handleFileChange}
+                accept="image/*"
+              />
+            </div>
             <button
               className="mt-4 btn btn-primary btn-block"
               disabled={edit_mutation.isPending}
