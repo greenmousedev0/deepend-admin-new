@@ -1,10 +1,14 @@
 import { useAuth } from "@/store/authStore";
 import { Bell, LogOut, Settings, User as UserIcon } from "lucide-react";
+import SideBarMenu from "./menus-buttons/SideBarMenu";
 
 export default function HeaderBar() {
   const [user, setUser] = useAuth();
   return (
     <div className="h-20 p-6 flex justify-end items-center bg-base-100 shadow-md">
+      <div className="mr-auto md:hidden">
+        <SideBarMenu />
+      </div>
       <div className="flex items-center space-x-4">
         <button className="btn btn-ghost btn-circle">
           <div className="indicator">

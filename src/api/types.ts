@@ -13,3 +13,28 @@ export interface FoodProps {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface SingleFoodProps {
+  id: string;
+  name: string;
+  description: string;
+  price: string;
+  categoryId: number;
+  imageUrls: {
+    url: string;
+    path: string;
+  }[];
+  quantity: number;
+  isAvailable: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FoodCategory {
+  id: number;
+  name: string;
+  description: string;
+  icon: string;
+  createdAt: string;
+  updatedAt: string;
+}

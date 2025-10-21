@@ -59,12 +59,57 @@ const appindex = createRoute({ getParentRoute: () => app, path: "/" }).lazy(
     ),
 );
 const appfood = createRoute({ getParentRoute: () => app, path: "food" });
+const appfoodnew = createRoute({ getParentRoute: () => appfood, path: "new" });
+const appfoodnewindex = createRoute({
+  getParentRoute: () => appfoodnew,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/food/new/index").then((m) =>
+    createLazyRoute("/app/food/new")({ component: m.default }),
+  ),
+);
 const appfoodindex = createRoute({
   getParentRoute: () => appfood,
   path: "/",
 }).lazy(() =>
   import("./pages/app/food/index").then((m) =>
     createLazyRoute("/app/food")({ component: m.default }),
+  ),
+);
+const appfoodcategory = createRoute({
+  getParentRoute: () => appfood,
+  path: "category",
+});
+const appfoodcategorynew = createRoute({
+  getParentRoute: () => appfoodcategory,
+  path: "new",
+});
+const appfoodcategorynewindex = createRoute({
+  getParentRoute: () => appfoodcategorynew,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/food/category/new/index").then((m) =>
+    createLazyRoute("/app/food/category/new")({ component: m.default }),
+  ),
+);
+const appfoodcategoryindex = createRoute({
+  getParentRoute: () => appfoodcategory,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/food/category/index").then((m) =>
+    createLazyRoute("/app/food/category")({ component: m.default }),
+  ),
+);
+const appfoodcategoryid = createRoute({
+  getParentRoute: () => appfoodcategory,
+  path: "$id",
+});
+const appfoodcategoryidindex = createRoute({
+  getParentRoute: () => appfoodcategoryid,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/food/category/[id]/index").then((m) =>
+    createLazyRoute("/app/food/category/$id")({ component: m.default }),
   ),
 );
 const appfoodid = createRoute({ getParentRoute: () => appfood, path: "$id" });
@@ -74,6 +119,18 @@ const appfoodidindex = createRoute({
 }).lazy(() =>
   import("./pages/app/food/[id]/index").then((m) =>
     createLazyRoute("/app/food/$id")({ component: m.default }),
+  ),
+);
+const appfoodidedit = createRoute({
+  getParentRoute: () => appfoodid,
+  path: "edit",
+});
+const appfoodideditindex = createRoute({
+  getParentRoute: () => appfoodidedit,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/food/[id]/edit/index").then((m) =>
+    createLazyRoute("/app/food/$id/edit")({ component: m.default }),
   ),
 );
 const index = createRoute({
@@ -93,8 +150,17 @@ const config = root.addChildren([
     appusers.addChildren([appusersindex]),
     appindex,
     appfood.addChildren([
+      appfoodnew.addChildren([appfoodnewindex]),
       appfoodindex,
-      appfoodid.addChildren([appfoodidindex]),
+      appfoodcategory.addChildren([
+        appfoodcategorynew.addChildren([appfoodcategorynewindex]),
+        appfoodcategoryindex,
+        appfoodcategoryid.addChildren([appfoodcategoryidindex]),
+      ]),
+      appfoodid.addChildren([
+        appfoodidindex,
+        appfoodidedit.addChildren([appfoodideditindex]),
+      ]),
     ]),
   ]),
   index,
