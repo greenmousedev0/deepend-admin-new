@@ -32,7 +32,7 @@ export default function index() {
 
   const delete_mutation = useMutation({
     mutationFn: async () => {
-      let resp = await apiClient.delete("/api/v1/admins/foods/" + id);
+      let resp = await apiClient.delete("admins/foods/" + id);
       return resp.data;
     },
     onSuccess: () => {

@@ -70,7 +70,12 @@ export default function FoodCategoryCard({
       <div key={category.id} className="card bg-base-100 shadow-xl">
         <div className="card-body">
           <div>
-            <img src={category.icon} className="size-20" alt="" />
+            <img
+              loading="lazy"
+              src={category.icon}
+              className="size-20"
+              alt=""
+            />
           </div>
           <h2 className="card-title">{category.name}</h2>
           <p>{category.description}</p>

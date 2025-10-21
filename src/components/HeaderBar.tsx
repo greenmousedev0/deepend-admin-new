@@ -1,9 +1,27 @@
 import { useAuth } from "@/store/authStore";
 import { Bell, LogOut, Settings, User as UserIcon } from "lucide-react";
 import SideBarMenu from "./menus-buttons/SideBarMenu";
+import { useNavigate } from "@tanstack/react-router";
+import { useMutation } from "@tanstack/react-query";
+import apiClient from "@/api/apiClient";
+import { toast } from "sonner";
+import { extract_message } from "@/helpers/auth";
 
 export default function HeaderBar() {
   const [user, setUser] = useAuth();
+  const nav = useNavigate();
+  const logout = useMutation({
+    mutationFn: async () => {
+      let resp = await apiClient.put("/auth/users/logout");
+      return resp.data;
+    },
+    onSuccess: () => {
+      setUser(null);
+      nav({
+        to: "/auth/login",
+      });
+    },
+  });
   return (
     <div className="h-20 p-6 flex justify-end items-center bg-base-100 shadow-md">
       <div className="mr-auto md:hidden">
@@ -48,7 +66,15 @@ export default function HeaderBar() {
               </a>
             </li>
             <li>
-              <a onClick={() => setUser(null)}>
+              <a
+                onClick={() => {
+                  toast.promise(logout.mutateAsync(), {
+                    loading: "Logging out...",
+                    success: extract_message,
+                    error: extract_message,
+                  });
+                }}
+              >
                 <LogOut size={18} />
                 Logout
               </a>

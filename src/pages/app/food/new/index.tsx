@@ -6,22 +6,30 @@ import apiClient from "@/api/apiClient";
 import { toast } from "sonner";
 import { extract_message } from "@/helpers/auth";
 import SimpleInput from "@/components/SimpleInput";
+import { uploadToCloudinary } from "@/api/cloud";
+import SimpleCarousel from "@/components/SimpleCarousel";
+import { useState } from "react";
 
 export default function index() {
   const nav = useNavigate();
   const form = useForm<UpdateFoodItemProps>();
   const { register, handleSubmit } = form;
-
+  const [images, setImages] = useState<FileList>();
   const createFoodMutation = useMutation({
     mutationFn: async (data: UpdateFoodItemProps) => {
-      const resp = await apiClient.post("admins/foods", data);
+      let imageUrls: { url: string; path: string }[] = [];
+
+      if (images) {
+        const uploaded = await uploadToCloudinary(images);
+        imageUrls = uploaded.map(({ url, path }) => ({ url, path }));
+      }
+
+      const resp = await apiClient.post("admins/foods", { ...data, imageUrls });
       return resp.data;
     },
     onSuccess: () => {
-      nav({
-        to: "/app/food",
-      });
-      // Handle success, e.g., show a toast, invalidate queries
+      nav({ to: "/app/food" });
+      toast.success("Food item created successfully!");
     },
   });
 
@@ -35,6 +43,55 @@ export default function index() {
 
   return (
     <div className="p-4">
+      <div className="h-[420px] mx-auto mb-8">
+        {images && images.length > 0 ? (
+          <SimpleCarousel>
+            {Array.from(images).map((image, index) => (
+              <img
+                key={index}
+                src={URL.createObjectURL(image)}
+                alt="Food Image"
+                className="h-[420px] w-full object-cover"
+              />
+            ))}
+          </SimpleCarousel>
+        ) : (
+          <div className=" text-2xl grid place-items-center h-full bg-base-300">
+            <label htmlFor="hidden-input" className="cursor-pointer">
+              Click To Select Images
+              <input
+                onChange={(e) => {
+                  let files = e.target.files;
+                  if (files && files.length > 0) {
+                    console.log(files);
+                    setImages(files);
+                  }
+                }}
+                type="file"
+                accept="image/*"
+                multiple
+                hidden
+                id="hidden-input"
+              />
+            </label>
+          </div>
+        )}
+      </div>
+      {/*<input
+        className="file-input"
+        type="file"
+        multiple
+        accept="image/*"
+        name=""
+        id=""
+        onClick={(e) => {
+          let files = e.target.files;
+          if (files && files.length > 0) {
+            const file = files[0];
+            uploadToCloudinary(files);
+          }
+        }}
+      />*/}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <h2 className="text-2xl font-bold mb-4">Add New Food</h2>
         <SimpleInput label="Name" {...register("name", { required: true })} />

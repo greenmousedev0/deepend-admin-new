@@ -29,3 +29,13 @@ export const get_user_value = () => {
   const store = getDefaultStore();
   return store.get(user_atom);
 };
+
+export const clear_user = () => {
+  const store = getDefaultStore();
+  store.set(user_atom, null);
+};
+
+export const set_user_value = (user: User) => {
+  const store = getDefaultStore();
+  store.set(user_atom, user);
+};

@@ -29,13 +29,15 @@ export default function SimpleCarousel(props: SimpleCarouselProps) {
         </div>
       </div>
       <button
-        className="embla__prev absolute top-1/2 left-2 -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-75 hover:opacity-100 transition-opacity"
+        type="button"
+        className="embla__prev absolute top-1/2 left-2 -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-75 hover:opacity-100 transition-opacity btn-btn-circle"
         onClick={scrollPrev}
       >
         <ChevronLeft />
       </button>
       <button
-        className="embla__next absolute top-1/2 right-2 -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-75 hover:opacity-100 transition-opacity"
+        type="button"
+        className="embla__next absolute top-1/2 right-2 -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-75 hover:opacity-100 transition-opacity btn btn-circle"
         onClick={scrollNext}
       >
         <ChevronRight />

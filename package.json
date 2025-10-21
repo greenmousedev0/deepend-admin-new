@@ -16,6 +16,7 @@
     "@tanstack/react-router": "^1.133.20",
     "@tanstack/router": "0.0.1-beta.174",
     "axios": "^1.12.2",
+    "cloudinary": "^2.8.0",
     "daisyui": "^5.3.0",
     "embla-carousel-react": "^8.6.0",
     "generouted": "^1.20.0",

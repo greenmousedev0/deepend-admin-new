@@ -56,8 +56,8 @@ export default function AppLayout(props: PropsWithChildren) {
             className="drawer-overlay"
           ></label>
           <div className="w-80 h-full flex flex-col bg-base-100">
-            <div className="h-20  grid place-items-center shadow ">
-              <div>
+            <div className="h-20  flex items-center px-8 shadow ">
+              <div className="font-bold capitalize text-lg">
                 Deepend <div>entertainment</div>
               </div>
             </div>
