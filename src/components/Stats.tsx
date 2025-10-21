@@ -14,56 +14,56 @@ import {
 const stats = [
   {
     title: "Total Revenue",
-    color: "blue",
+    color: "#a16207",
     icon: <DollarSign className="h-4 w-4 text-muted-foreground" />,
     subtitle: "+20.1% from last month",
     main: "$45,231.89",
   },
   {
     title: "Subscriptions",
-    color: "green",
+    color: "brown",
     icon: <Users className="h-4 w-4 text-muted-foreground" />,
     subtitle: "+180.1% from last month",
     main: "+2350",
   },
   {
     title: "Sales",
-    color: "orange",
+    color: "green",
     icon: <CreditCard className="h-4 w-4 text-muted-foreground" />,
     subtitle: "+19% from last month",
     main: "+12,234",
   },
   {
     title: "Active Now",
-    color: "red",
+    color: "#c2410c",
     icon: <Activity className="h-4 w-4 text-muted-foreground" />,
     subtitle: "+201 since last hour",
     main: "+573",
   },
   {
     title: "Orders",
-    color: "purple",
+    color: "#0e7490",
     icon: <ShoppingCart className="h-4 w-4 text-muted-foreground" />,
     subtitle: "+15% from last month",
     main: "1,234",
   },
   {
     title: "Page Views",
-    color: "cyan",
+    color: "mediumpurple",
     icon: <BarChart className="h-4 w-4 text-muted-foreground" />,
     subtitle: "+10% from last month",
     main: "56,789",
   },
   {
     title: "Conversion Rate",
-    color: "pink",
+    color: "blue",
     icon: <TrendingUp className="h-4 w-4 text-muted-foreground" />,
     subtitle: "+2.5% from last month",
     main: "4.5%",
   },
   {
     title: "Average Session",
-    color: "yellow",
+    color: "brown",
     icon: <Clock className="h-4 w-4 text-muted-foreground" />,
     subtitle: "+5% from last month",
     main: "00:05:30",
@@ -73,7 +73,7 @@ const stats = [
 export default function Stats() {
   return (
     <div>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
         {stats.map((stat) => (
           <StatCard key={stat.title} {...stat} />
         ))}

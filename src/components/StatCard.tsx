@@ -12,11 +12,9 @@ export default function StatCard(props: StatCardProps) {
   return (
     <div
       className="flex gap-2 p-4 rounded-md bg-base-200 shadow-xl"
-      style={
-        {
-          // background: props.color,
-        }
-      }
+      style={{
+        background: props.color,
+      }}
     >
       <div className="flex-1 flex flex-col">
         <h2 className="text-xl text-wrap">{props.title}</h2>
