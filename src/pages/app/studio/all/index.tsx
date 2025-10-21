@@ -182,8 +182,9 @@ export const StudioCard = ({
         <div className="card-actions justify-end mt-4">
           <Link
             to={"/app/studio/$id"}
-            //@ts-ignore
             params={{
+              //@ts-ignore
+
               id: studio.id,
             }}
           ></Link>
