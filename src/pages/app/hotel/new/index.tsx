@@ -48,7 +48,7 @@ export default function index() {
   };
   const { mutateAsync, isPending } = useMutation({
     mutationFn: async (data: Partial<NewHotel>) => {
-      let resp = await apiClient.post("/hotels", data); // Assuming /hotels is your endpoint
+      let resp = await apiClient.post("admins/hotels", data); // Assuming /hotels is your endpoint
       return resp.data;
     },
   });

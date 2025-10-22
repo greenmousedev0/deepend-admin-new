@@ -11,7 +11,7 @@ export default function HotelCard({ hotel }: { hotel: Hotel }) {
             <img
               src={hotel.imageUrls[0].url}
               alt={`Image of ${hotel.name}`}
-              className="w-[500px] h-full object-cover"
+              className="w-[500px] h-[400px] object-cover"
             />
           </div>
         )}
