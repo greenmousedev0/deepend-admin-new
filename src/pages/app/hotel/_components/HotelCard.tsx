@@ -1,8 +1,28 @@
+import apiClient from "@/api/apiClient";
 import type { Hotel } from "@/api/types";
 import SimpleCarousel from "@/components/SimpleCarousel";
+import { extract_message } from "@/helpers/auth";
+import { useMutation } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
+import { toast } from "sonner";
 
-export default function HotelCard({ hotel }: { hotel: Hotel }) {
+export default function HotelCard({
+  hotel,
+  refetch,
+}: {
+  hotel: Hotel;
+  refetch: () => any;
+}) {
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: async () => {
+      let resp = await apiClient.delete("admins/hotels/" + hotel.id);
+      return resp.data;
+    },
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
   return (
     <div key={hotel.id} className="card  bg-base-100 shadow-xl">
       <div className="h-[400px]">
@@ -88,10 +108,24 @@ export default function HotelCard({ hotel }: { hotel: Hotel }) {
             </div>
           </div>
         )}
-        <div className="">
+        <div className="mt-4 flex gap-2">
+          <button
+            onClick={() => {
+              toast.promise(mutateAsync, {
+                loading: "Deleting...",
+                success: extract_message,
+                error: extract_message,
+              });
+            }}
+            disabled={isPending}
+            className="btn btn-error flex-1"
+          >
+            Delete
+          </button>
           <Link
+            disabled={isPending}
             to={`/app/hotel/${hotel.id}`}
-            className="btn btn-block btn-primary"
+            className="btn flex-1 btn-info "
           >
             View Details
           </Link>

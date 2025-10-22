@@ -6,6 +6,7 @@ import SimplePaginator from "@/components/SimplePaginator";
 import { usePagination } from "@/store/pagination";
 import { useQuery } from "@tanstack/react-query";
 import HotelCard from "./_components/HotelCard";
+import { Link } from "@tanstack/react-router";
 
 export default function index() {
   const props = usePagination();
@@ -33,11 +34,15 @@ export default function index() {
   const items = query.data?.payload || [];
   return (
     <>
-      <SimpleHeader title={"Hotels"} />
+      <SimpleHeader title={"Hotels"}>
+        <Link to="/app/hotel/new" className="btn btn-primary">
+          Add New Hotel
+        </Link>
+      </SimpleHeader>
       <div className="container mx-auto ">
         <div className="space-y-4">
           {items?.map((hotel) => (
-            <HotelCard hotel={hotel} key={hotel.id} />
+            <HotelCard refetch={query.refetch} hotel={hotel} key={hotel.id} />
           ))}
         </div>
       </div>

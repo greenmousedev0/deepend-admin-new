@@ -36,6 +36,7 @@ export default function index() {
 
   const { isPending, mutateAsync } = useMutation({
     mutationFn: async (data: any) => {
+      //@ts-ignore
       const [uploadedImage] = await uploadToCloudinary([image]);
       data.icon = uploadedImage.url;
       data.iconPath = uploadedImage.path;
