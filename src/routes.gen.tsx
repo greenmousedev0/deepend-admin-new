@@ -112,6 +112,18 @@ const apphotelindex = createRoute({
     createLazyRoute("/app/hotel")({ component: m.default }),
   ),
 );
+const apphotelamenity = createRoute({
+  getParentRoute: () => apphotel,
+  path: "amenity",
+});
+const apphotelamenityindex = createRoute({
+  getParentRoute: () => apphotelamenity,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/hotel/amenity/index").then((m) =>
+    createLazyRoute("/app/hotel/amenity")({ component: m.default }),
+  ),
+);
 const apphotelid = createRoute({ getParentRoute: () => apphotel, path: "$id" });
 const apphotelidindex = createRoute({
   getParentRoute: () => apphotelid,
@@ -262,6 +274,7 @@ const config = root.addChildren([
     apphotel.addChildren([
       apphotelnew.addChildren([apphotelnewindex]),
       apphotelindex,
+      apphotelamenity.addChildren([apphotelamenityindex]),
       apphotelid.addChildren([apphotelidindex]),
     ]),
     appfood.addChildren([

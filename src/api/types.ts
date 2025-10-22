@@ -153,3 +153,12 @@ export interface HotelInfo {
     isAvailable: boolean;
   }[];
 }
+
+export interface Amenity {
+  id: number;
+  name: string;
+  icon: string;
+  iconPath: string;
+  createdAt: string;
+  updatedAt: string;
+}

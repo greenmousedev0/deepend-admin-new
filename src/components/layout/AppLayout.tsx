@@ -52,6 +52,7 @@ const dash_links: {
     children: [
       // { path: "/app/hotel", label: "Hotel Bookings" },
       { path: "/app/hotel", label: "All Hotels" },
+      { path: "/app/hotel/amenity", label: "Hotel Amenity" },
     ],
   },
 ];
