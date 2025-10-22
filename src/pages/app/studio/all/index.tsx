@@ -184,7 +184,6 @@ export const StudioCard = ({
             to={"/app/studio/$id"}
             params={{
               //@ts-ignore
-
               id: studio.id,
             }}
           ></Link>

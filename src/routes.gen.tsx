@@ -91,6 +91,36 @@ const appindex = createRoute({ getParentRoute: () => app, path: "/" }).lazy(
       createLazyRoute("/app")({ component: m.default }),
     ),
 );
+const apphotel = createRoute({ getParentRoute: () => app, path: "hotel" });
+const apphotelnew = createRoute({
+  getParentRoute: () => apphotel,
+  path: "new",
+});
+const apphotelnewindex = createRoute({
+  getParentRoute: () => apphotelnew,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/hotel/new/index").then((m) =>
+    createLazyRoute("/app/hotel/new")({ component: m.default }),
+  ),
+);
+const apphotelindex = createRoute({
+  getParentRoute: () => apphotel,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/hotel/index").then((m) =>
+    createLazyRoute("/app/hotel")({ component: m.default }),
+  ),
+);
+const apphotelid = createRoute({ getParentRoute: () => apphotel, path: "$id" });
+const apphotelidindex = createRoute({
+  getParentRoute: () => apphotelid,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/hotel/[id]/index").then((m) =>
+    createLazyRoute("/app/hotel/$id")({ component: m.default }),
+  ),
+);
 const appfood = createRoute({ getParentRoute: () => app, path: "food" });
 const appfoodnew = createRoute({ getParentRoute: () => appfood, path: "new" });
 const appfoodnewindex = createRoute({
@@ -229,6 +259,11 @@ const config = root.addChildren([
       appstudioid.addChildren([appstudioidindex]),
     ]),
     appindex,
+    apphotel.addChildren([
+      apphotelnew.addChildren([apphotelnewindex]),
+      apphotelindex,
+      apphotelid.addChildren([apphotelidindex]),
+    ]),
     appfood.addChildren([
       appfoodnew.addChildren([appfoodnewindex]),
       appfoodindex,

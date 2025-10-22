@@ -45,6 +45,15 @@ const dash_links: {
       { path: "/app/studio/all", label: "All Studios" },
     ],
   },
+  {
+    path: "/app/hotel",
+    label: "Hotel",
+    type: "submenu",
+    children: [
+      // { path: "/app/hotel", label: "Hotel Bookings" },
+      { path: "/app/hotel", label: "All Hotels" },
+    ],
+  },
 ];
 export default function AppLayout(props: PropsWithChildren) {
   return (

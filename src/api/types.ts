@@ -75,3 +75,81 @@ export interface StudioAvailability {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface Hotel {
+  id: string;
+  name: string;
+  description: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  imageUrls: {
+    url: string;
+    path: string;
+  }[];
+  rating: string;
+  isAvailable: boolean;
+  coordinates: {
+    lat: number;
+    lon: number;
+  };
+  createdAt: string;
+  updatedAt: string;
+  amenities: {
+    id: number;
+    name: string;
+    icon: string;
+  }[];
+  rooms: {
+    id: string;
+    name: string;
+    description: string;
+    pricePerNight: string;
+    imageUrls: {
+      url: string;
+      path: string;
+    }[];
+    capacity: number;
+    isAvailable: boolean;
+  }[];
+}
+
+export interface HotelInfo {
+  id: string;
+  name: string;
+  description: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  imageUrls: {
+    url: string;
+    path: string;
+  }[];
+  rating: string;
+  isAvailable: boolean;
+  coordinates: {
+    lat: number;
+    lon: number;
+  };
+  createdAt: string;
+  updatedAt: string;
+  amenities: {
+    id: number;
+    name: string;
+    icon: string;
+  }[];
+  rooms: {
+    id: string;
+    name: string;
+    description: string;
+    pricePerNight: string;
+    imageUrls: {
+      url: string;
+      path: string;
+    }[];
+    capacity: number;
+    isAvailable: boolean;
+  }[];
+}

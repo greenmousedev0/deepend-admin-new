@@ -24,7 +24,7 @@ export default function SideBarMenu() {
 
   return (
     <div
-      className="btn btn-ghost"
+      className="btn btn-ghost btn-square"
       onClick={() => {
         const menu = document.querySelector("#app-drawer") as HTMLInputElement;
         menu.click();

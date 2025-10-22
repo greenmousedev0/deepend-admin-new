@@ -28,13 +28,13 @@
   --color-warning-content: oklch(15.496% 0.023 81.519);
   --color-error: oklch(51.61% 0.146 29.674);
   --color-error-content: oklch(90.322% 0.029 29.674);
-  --radius-selector: 0rem;
+  --radius-selector: 0.5rem;
   --radius-field: 0.25rem;
   --radius-box: 0.25rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 1px;
-  --depth: 0;
+  --depth: 1;
   --noise: 0;
 }
 .embla {
