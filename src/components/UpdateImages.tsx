@@ -1,4 +1,3 @@
-import type { HotelInfo } from "@/api/types";
 import { XCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -49,6 +48,7 @@ export default function UpdateImages({
             id="new-images"
             onChange={(e) => {
               const files = e.target.files;
+              //@ts-ignore
               setNewImages((prev) => [...prev, ...files]);
             }}
           />

@@ -38,6 +38,11 @@ export default function index() {
           action=""
           className="w-full p-6 rounded-lg bg-base-100 shadow space-y-4 max-w-xl"
         >
+          <img
+            className="h-22 mx-auto"
+            src="https://deependapp.com.ng/assets/images/deep.png"
+            alt=""
+          />
           <h2 className="text-2xl font-bold">Admin Login</h2>
           <SimpleInput {...form.register("email")} label="Email" />
           <SimpleInput
