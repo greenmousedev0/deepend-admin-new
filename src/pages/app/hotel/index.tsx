@@ -40,7 +40,7 @@ export default function index() {
         </Link>
       </SimpleHeader>
       <div className="container mx-auto ">
-        <div className="space-y-4">
+        <div className="space-y-4 md:grid-cols-2 grid gap-2">
           {items?.map((hotel) => (
             <HotelCard refetch={query.refetch} hotel={hotel} key={hotel.id} />
           ))}

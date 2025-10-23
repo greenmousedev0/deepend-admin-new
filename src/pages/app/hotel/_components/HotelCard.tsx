@@ -36,17 +36,20 @@ export default function HotelCard({
           </div>
         )}
       </div>
-      <div className="card-body">
+      <div className=" p-4 space-y-4 flex flex-col">
         <h2 className="card-title">{hotel.name}</h2>
         <p className="text-sm text-base-content/80">{hotel.description}</p>
-        <div className="flex flex-col md:flex-row md:justify-between text-sm mt-2">
-          <p>
-            <strong>Address:</strong> {hotel.address}, {hotel.city},{" "}
-            {hotel.state}, {hotel.country}
-          </p>
-          <p>
+        <div className="flex flex-col    gap-4 text-sm">
+          <div>
+            <h2 className="fieldset-label">Address:</h2>
+            <p className="px-2  mt-2 bg-base-200 p-2">
+              {" "}
+              {hotel.address}, {hotel.city}, {hotel.state}, {hotel.country}
+            </p>
+          </div>
+          <div>
             <strong>Rating:</strong> {hotel.rating} / 5
-          </p>
+          </div>
           <p>
             <strong>Available:</strong>{" "}
             <span
@@ -70,45 +73,7 @@ export default function HotelCard({
             </div>
           </div>
         )}
-        {hotel.rooms && hotel.rooms.length > 0 && (
-          <div className="mt-4">
-            <h3 className="text-lg font-semibold mb-2">
-              Rooms: {hotel.rooms.length}
-            </h3>
-            <div className="">
-              <SimpleCarousel>
-                {hotel.rooms.map((room) => (
-                  <div
-                    key={room.id}
-                    className="card m-2  card-compact bg-base-200 shadow"
-                  >
-                    <div className="card-body">
-                      <h4 className="card-title text-base">{room.name}</h4>
-                      <p className="text-xs">{room.description}</p>
-                      <p className="text-sm">
-                        <strong>Price per Night:</strong> ${room.pricePerNight}
-                      </p>
-                      <p className="text-sm">
-                        <strong>Capacity:</strong> {room.capacity}
-                      </p>
-                      <p className="text-sm">
-                        <strong>Available:</strong>{" "}
-                        <span
-                          className={`badge ${
-                            room.isAvailable ? "badge-success" : "badge-error"
-                          } badge-sm`}
-                        >
-                          {room.isAvailable ? "Yes" : "No"}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </SimpleCarousel>
-            </div>
-          </div>
-        )}
-        <div className="mt-4 flex gap-2">
+        <div className=" flex gap-2">
           <button
             onClick={() => {
               toast.promise(mutateAsync, {
@@ -127,7 +92,7 @@ export default function HotelCard({
             to={`/app/hotel/${hotel.id}`}
             className="btn flex-1 btn-info "
           >
-            View Details
+            View
           </Link>
         </div>
       </div>

@@ -30,7 +30,7 @@ export default function SimpleCarousel(props: SimpleCarouselProps) {
       </div>
       <button
         type="button"
-        className="embla__prev absolute top-1/2 left-2 -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-75 hover:opacity-100 transition-opacity btn-btn-circle"
+        className="embla__prev btn btn-circle absolute top-1/2 left-2 -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-75 hover:opacity-100 transition-opacity btn-btn-circle"
         onClick={scrollPrev}
       >
         <ChevronLeft />

@@ -61,7 +61,7 @@ export default function AppLayout(props: PropsWithChildren) {
     <div className="h-screen flex flex-col">
       <div className="drawer lg:drawer-open">
         <input id="app-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col">
+        <div className="drawer-content flex flex-col  ">
           {/*<div className="h-20 bg-base-300">s</div>*/}
           <HeaderBar />
           {/* Page content here */}
@@ -72,17 +72,22 @@ export default function AppLayout(props: PropsWithChildren) {
             {props.children}
           </main>
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side ">
           <label
             htmlFor="app-drawer"
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <div className="w-80 h-full flex flex-col bg-base-100">
+          <div className="w-80 h-full flex flex-col bg-base-100 border-r border-current/10 overflow-x-hidden">
             <div className="h-20  flex items-center px-8 shadow ">
-              <div className="font-bold capitalize text-lg">
+              <img
+                className="h-18 mx-auto"
+                src="https://deependapp.com.ng/assets/images/deep.png"
+                alt=""
+              />
+              {/*<div className="font-bold capitalize text-lg">
                 Deepend <div>entertainment</div>
-              </div>
+              </div>*/}
             </div>
             <div className="flex-1 overflow-y-auto">
               <ul className="menu min-h-full space-y-2 w-80 p-4">
