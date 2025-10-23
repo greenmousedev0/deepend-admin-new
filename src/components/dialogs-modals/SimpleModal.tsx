@@ -1,4 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
+import { Toaster } from "sonner";
 
 interface ModalProps {
   children: React.ReactNode;
@@ -23,6 +24,7 @@ const Modal = forwardRef<ModalHandle, ModalProps>(({ children }, ref) => {
 
   return (
     <dialog ref={modalRef} className="modal">
+      <Toaster theme="dark" richColors />
       <div className="modal-box">
         {children}
         <div className="modal-action">

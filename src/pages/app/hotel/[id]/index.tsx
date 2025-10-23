@@ -56,7 +56,7 @@ export default function index() {
         </div>
         <h1 className="text-3xl font-bold mb-4">{item.name}</h1>
 
-        <p className="text-lg mb-4">{item.description}</p>
+        <p className="text-lg mb-4 fieldset-label">{item.description}</p>
         <div className="grid  grid-cols-1  gap-4 mb-4">
           <div className="space-y-2">
             <div>
@@ -66,8 +66,8 @@ export default function index() {
               </p>
             </div>
             <div>
-              <h2 className="mb-2">Rating: </h2>
-              <p className="">{item.rating}/5</p>
+              <span className="mb-2 fieldset-label inline">Rating: </span>
+              <span className="">{item.rating}/5</span>
             </div>
             <div>
               <h2 className="mb-2">Available: </h2>
@@ -95,7 +95,7 @@ export default function index() {
           Rooms {item.rooms.length}
         </h2>
         <div className="p-4 bg-base-300 rounded-md">
-          <HotelRooms item={item.rooms} />
+          <HotelRooms item={item.rooms} refetch={query.refetch} />
         </div>
       </div>
     </div>

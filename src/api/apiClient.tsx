@@ -87,12 +87,12 @@
 //   },
 // );
 
-// export interface ApiResponse<T = any> {
-//   message: string;
-//   payload: T;
-//   status: string;
-//   statusCode: number;
-// }
+export interface ApiResponse<T = any> {
+  message: string;
+  payload: T;
+  status: string;
+  statusCode: number;
+}
 
 // export default apiClient;
 
