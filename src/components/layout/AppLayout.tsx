@@ -68,7 +68,7 @@ export default function AppLayout(props: PropsWithChildren) {
           {/*<label htmlFor="my-drawer-3" className="btn drawer-button lg:hidden">
             Open drawer
           </label>*/}
-          <main className="p-6 flex-1 bg-base-200 overflow-y-auto">
+          <main className="p-6 flex-1 bg-base-200 overflow-y-auto border-l border-t border-current/20">
             {props.children}
           </main>
         </div>
@@ -78,7 +78,7 @@ export default function AppLayout(props: PropsWithChildren) {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <div className="w-80 h-full flex flex-col bg-base-100 border-r border-current/10 overflow-x-hidden">
+          <div className="w-72 h-full flex flex-col bg-base-100 ">
             <div className="h-20  flex items-center px-8 shadow ">
               <img
                 className="h-18 mx-auto"
@@ -90,7 +90,7 @@ export default function AppLayout(props: PropsWithChildren) {
               </div>*/}
             </div>
             <div className="flex-1 overflow-y-auto">
-              <ul className="menu min-h-full space-y-2 w-80 p-4">
+              <ul className="menu min-h-full space-y-2 w-72 p-4">
                 {/* Sidebar content here */}
                 {dash_links.map((link) =>
                   link.type === "menu" ? (
