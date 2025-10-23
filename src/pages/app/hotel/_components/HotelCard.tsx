@@ -61,6 +61,9 @@ export default function HotelCard({
             </span>
           </p>
         </div>
+        <div>
+          <h2>Rooms: {hotel.rooms.length}</h2>
+        </div>
         {hotel.amenities && hotel.amenities.length > 0 && (
           <div className="mt-4">
             <h3 className="text-lg font-semibold mb-2">Amenities:</h3>

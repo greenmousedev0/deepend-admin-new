@@ -52,6 +52,16 @@ export default function HotelRooms({
       refetch();
     },
   });
+
+  const delete_mutate = useMutation({
+    mutationFn: async (room_id: string) => {
+      let resp = await apiClient.delete(`admins/hotels/${id}/rooms/${room_id}`);
+      return resp.data;
+    },
+    onSuccess: () => {
+      refetch();
+    },
+  });
   return (
     <>
       <div className="">
@@ -110,9 +120,22 @@ export default function HotelRooms({
                       reset({ ...room });
                       modal.showModal();
                     }}
-                    className="btn btn-primary btn-block"
+                    className="btn btn-info btn-block"
                   >
                     Edit
+                  </button>
+                  <button
+                    disabled={delete_mutate.isPending}
+                    onClick={() => {
+                      toast.promise(() => delete_mutate.mutateAsync(room.id), {
+                        loading: "Deleting...",
+                        success: extract_message,
+                        error: extract_message,
+                      });
+                    }}
+                    className="btn btn-error btn-block"
+                  >
+                    Delete
                   </button>
                 </div>
               </div>
