@@ -193,7 +193,7 @@ const renderLegend = (props: any) => {
 };
 export default function Example() {
   return (
-    <div className="card bg-base-100 shadow-xl p-6 space-y-6">
+    <div className="card bg-base-100 shadow-xl p-6 space-y-6 ring rounded-md ring-current/20">
       <h2 className="card-title text-2xl font-bold">Subscription Analysis</h2>
       <LineChart
         style={{

@@ -44,7 +44,7 @@ export default function HeaderBar() {
             <div className="w-10 rounded-full">
               <img
                 alt="User Avatar"
-                src={`https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=random`}
+                src={`https://ui-avatars.com/api/?name=Admin&background=random`}
               />
             </div>
           </div>
