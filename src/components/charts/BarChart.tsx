@@ -56,7 +56,7 @@ const data = [
 
 const SimpleBarChart = () => {
   return (
-    <div className="h-full  p-4 bg-base-100 shadow ring rounded-md ring-current/20">
+    <div className="h-full   p-4 bg-base-100 shadow ring rounded-md ring-current/20">
       <BarChart
         style={{
           width: "100%",

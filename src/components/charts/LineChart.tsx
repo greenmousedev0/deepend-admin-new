@@ -193,15 +193,29 @@ const renderLegend = (props: any) => {
 };
 export default function Example() {
   return (
-    <div className="card bg-base-100 shadow-xl p-6 space-y-6 ring rounded-md ring-current/20">
+    <div className=" card h-full bg-base-100 shadow-xl p-4 space-y-2 ring rounded-md ring-current/20">
       <h2 className="card-title text-2xl font-bold">Subscription Analysis</h2>
+      <ul className="join flex-wrap gap-2">
+        {stats.map((item) => {
+          return (
+            <li
+              className="float-left text-sm   badge"
+              key={item.title}
+              style={{ background: item.color }}
+            >
+              <span className=""></span>
+              {item.title}
+            </li>
+          );
+        })}
+      </ul>
       <LineChart
         style={{
           width: "100%",
-          maxWidth: "700px",
+          // maxWidth: "680px",
           height: "100%",
           maxHeight: "70vh",
-          aspectRatio: 1.618,
+          // aspectRatio: 1.618,
         }}
         responsive
         data={data}
@@ -216,24 +230,6 @@ export default function Example() {
         <XAxis dataKey="name" />
         <YAxis width="auto" />
         <Tooltip />
-        <Legend
-          iconType="cross"
-          className="text-xs"
-          content={renderLegend}
-          // formatter={(value, entry, index) => {
-          //   return (
-          //     <span
-          //       className="text-xs"
-          //       style={{
-          //         color: stats[index].color,
-          //       }}
-          //     >
-          //       {value}
-          //     </span>
-          //   );
-          // }}
-        />
-
         {stats.map((item) => {
           return (
             <Line
@@ -244,12 +240,6 @@ export default function Example() {
             />
           );
         })}
-        {/*<Line
-          type="monotone"
-          dataKey="Hotel Booking"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
-        />*/}
       </LineChart>
     </div>
   );
