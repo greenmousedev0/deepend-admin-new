@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import type { UpdateFoodItemProps } from "../[id]/edit";
 import { useMutation } from "@tanstack/react-query";
 import apiClient from "@/api/apiClient";
@@ -9,11 +9,14 @@ import SimpleInput from "@/components/SimpleInput";
 import { uploadToCloudinary } from "@/api/cloud";
 import SimpleCarousel from "@/components/SimpleCarousel";
 import { useState } from "react";
+import SimpleSelect from "@/components/SimpleSelect";
+import type { FoodCategory } from "@/api/types";
+import SimpleTextArea from "@/components/SimpleTextArea";
 
 export default function index() {
   const nav = useNavigate();
   const form = useForm<UpdateFoodItemProps>();
-  const { register, handleSubmit } = form;
+  const { register, handleSubmit, control } = form;
   const [images, setImages] = useState<FileList>();
   const createFoodMutation = useMutation({
     mutationFn: async (data: UpdateFoodItemProps) => {
@@ -95,7 +98,7 @@ export default function index() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <h2 className="text-2xl font-bold mb-4">Add New Food</h2>
         <SimpleInput label="Name" {...register("name", { required: true })} />
-        <SimpleInput
+        <SimpleTextArea
           label="Description"
           {...register("description", { required: true })}
         />
@@ -105,10 +108,30 @@ export default function index() {
           step="0.01"
           {...register("price", { required: true, valueAsNumber: true })}
         />
-        <SimpleInput
+        {/*<SimpleInput
           label="Category ID"
           type="number"
           {...register("categoryId", { required: true, valueAsNumber: true })}
+        />*/}
+        <Controller
+          control={control}
+          name="categoryId"
+          render={({ field }) => {
+            return (
+              <>
+                {field.value}{" "}
+                <SimpleSelect
+                  label="Category"
+                  value={field.value}
+                  onChange={field.onChange}
+                  route="admins/foods/categories"
+                  render={(item: FoodCategory) => {
+                    return <option value={item.id}>{item.name}</option>;
+                  }}
+                />
+              </>
+            );
+          }}
         />
         <SimpleInput
           label="Quantity"
