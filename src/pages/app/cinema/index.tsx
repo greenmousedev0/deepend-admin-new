@@ -2,6 +2,7 @@ import apiClient, { type ApiResponse } from "@/api/apiClient";
 import type { Cinema } from "@/api/types";
 import SimpleHeader from "@/components/SimpleHeader";
 import SimpleLoader from "@/components/SimpleLoader";
+import SimplePaginator from "@/components/SimplePaginator";
 import { usePagination } from "@/store/pagination";
 import { useQuery } from "@tanstack/react-query";
 
@@ -22,14 +23,14 @@ export default function index() {
   if (query.isLoading)
     return (
       <>
-        <SimpleHeader title={"cinema"} />
+        <SimpleHeader title={"Cinemas"} />
         <SimpleLoader />
       </>
     );
   const items = query.data.payload;
   return (
     <>
-      <SimpleHeader title={"Cinema"} />
+      <SimpleHeader title={"Cinemas"} />
       <div className="flex flex-col gap-2 ">
         {items.map((item) => (
           <div
@@ -44,6 +45,9 @@ export default function index() {
             </div>
           </div>
         ))}
+      </div>
+      <div className=" mt-4">
+        <SimplePaginator {...props} />
       </div>
     </>
   );

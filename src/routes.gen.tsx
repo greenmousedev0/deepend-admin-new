@@ -85,18 +85,6 @@ const appstudioidindex = createRoute({
     createLazyRoute("/app/studio/$id")({ component: m.default }),
   ),
 );
-const appmoviecinema = createRoute({
-  getParentRoute: () => app,
-  path: "movie-cinema",
-});
-const appmoviecinemaindex = createRoute({
-  getParentRoute: () => appmoviecinema,
-  path: "/",
-}).lazy(() =>
-  import("./pages/app/movie-cinema/index").then((m) =>
-    createLazyRoute("/app/movie-cinema")({ component: m.default }),
-  ),
-);
 const appindex = createRoute({ getParentRoute: () => app, path: "/" }).lazy(
   () =>
     import("./pages/app/index").then((m) =>
@@ -291,6 +279,18 @@ const appfoodideditindex = createRoute({
   ),
 );
 const appcinema = createRoute({ getParentRoute: () => app, path: "cinema" });
+const appcinemamovies = createRoute({
+  getParentRoute: () => appcinema,
+  path: "movies",
+});
+const appcinemamoviesindex = createRoute({
+  getParentRoute: () => appcinemamovies,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/cinema/movies/index").then((m) =>
+    createLazyRoute("/app/cinema/movies")({ component: m.default }),
+  ),
+);
 const appcinemaindex = createRoute({
   getParentRoute: () => appcinema,
   path: "/",
@@ -343,7 +343,6 @@ const config = root.addChildren([
       appstudioall.addChildren([appstudioallindex]),
       appstudioid.addChildren([appstudioidindex]),
     ]),
-    appmoviecinema.addChildren([appmoviecinemaindex]),
     appindex,
     apphotel.addChildren([
       apphotelroom.addChildren([
@@ -380,6 +379,7 @@ const config = root.addChildren([
       ]),
     ]),
     appcinema.addChildren([
+      appcinemamovies.addChildren([appcinemamoviesindex]),
       appcinemaindex,
       appcinemahalls.addChildren([appcinemahallsindex]),
       appcinemaid.addChildren([appcinemaidindex]),

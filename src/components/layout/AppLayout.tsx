@@ -58,14 +58,18 @@ const dash_links: {
     path: "/app/cinema",
     label: "Cinema",
     type: "submenu",
-    children: [{ path: "/app/cinema", label: "All Cinemas" }],
+    children: [
+      { path: "/app/cinema", label: "All Cinemas" },
+      { path: "/app/cinema/halls", label: "All Halls" },
+      { path: "/app/movies", label: "All Movies" },
+    ],
   },
-  {
-    path: "/app/movie-cinema",
-    label: "Movie Cinemas",
-    type: "submenu",
-    children: [{ path: "/app/movie-cinema", label: "All Movie Cinemas" }],
-  },
+  // {
+  //   path: "/app/movie-cinema",
+  //   label: "Movie Cinemas",
+  //   type: "submenu",
+  //   children: [{ path: "/app/movie-cinema", label: "All Movie Cinemas" }],
+  // },
 ];
 export default function AppLayout(props: PropsWithChildren) {
   return (
@@ -110,7 +114,7 @@ export default function AppLayout(props: PropsWithChildren) {
                     </li>
                   ) : (
                     <li key={"nav" + link.path}>
-                      <details open>
+                      <details>
                         <summary>{link.label}</summary>
                         <ul>
                           {link.children?.map((childLink) => (

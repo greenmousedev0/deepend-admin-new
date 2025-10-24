@@ -2,7 +2,7 @@ import apiClient, { type ApiResponse } from "@/api/apiClient";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Halls({ cinemaID }) {
-  const query = useQuery<ApiResponse<[]>>({
+  const query = useQuery<ApiResponse<{ name: string; id: string }[]>>({
     queryKey: ["cinema-halls", cinemaID],
     queryFn: async () => {
       const response = await apiClient.get(
@@ -18,11 +18,11 @@ export default function Halls({ cinemaID }) {
   return (
     <>
       <h2 className="label mb-2">Halls ({items.length})</h2>
-      <div className="p-4 bg-base-300">
+      <ul className="p-4 bg-base-300">
         {items.map((item) => {
-          return <></>;
+          return <li key={item.id}>{item.name}</li>;
         })}
-      </div>
+      </ul>
     </>
   );
 }

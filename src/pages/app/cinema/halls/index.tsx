@@ -2,13 +2,14 @@ import apiClient, { type ApiResponse } from "@/api/apiClient";
 import type { Cinema } from "@/api/types";
 import SimpleHeader from "@/components/SimpleHeader";
 import SimpleLoader from "@/components/SimpleLoader";
+import SimplePaginator from "@/components/SimplePaginator";
 import { usePagination } from "@/store/pagination";
 import { useQuery } from "@tanstack/react-query";
 
 export default function index() {
   const props = usePagination();
   const query = useQuery<ApiResponse<Cinema[]>>({
-    queryKey: ["cinemas", props.page],
+    queryKey: ["cinemas-halls", props.page],
     queryFn: async () =>
       (
         await apiClient.get("admins/cinemas/halls", {
@@ -38,12 +39,12 @@ export default function index() {
           >
             <div className="card-body">
               <h2 className="card-title">{item.name}</h2>
-              <p>
-                {item.address}, {item.city}, {item.state}
-              </p>
             </div>
           </div>
         ))}
+      </div>
+      <div className=" mt-4">
+        <SimplePaginator {...props} />
       </div>
     </>
   );
