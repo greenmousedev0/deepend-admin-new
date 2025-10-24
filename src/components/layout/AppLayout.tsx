@@ -50,10 +50,21 @@ const dash_links: {
     label: "Hotel",
     type: "submenu",
     children: [
-      // { path: "/app/hotel", label: "Hotel Bookings" },
       { path: "/app/hotel", label: "All Hotels" },
       { path: "/app/hotel/amenity", label: "Hotel Amenity" },
     ],
+  },
+  {
+    path: "/app/cinema",
+    label: "Cinema",
+    type: "submenu",
+    children: [{ path: "/app/cinema", label: "All Cinemas" }],
+  },
+  {
+    path: "/app/movie-cinema",
+    label: "Movie Cinemas",
+    type: "submenu",
+    children: [{ path: "/app/movie-cinema", label: "All Movie Cinemas" }],
   },
 ];
 export default function AppLayout(props: PropsWithChildren) {

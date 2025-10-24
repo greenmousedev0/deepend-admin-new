@@ -162,3 +162,33 @@ export interface Amenity {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface Cinema {
+  id: string;
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  countryId: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface MovieCinema {
+  id: string;
+  cinemaId: string;
+  title: string;
+  description: string;
+  cast: string;
+  durationMinutes: number;
+  ageRating: number;
+  posterUrl: string;
+  posterPath: string;
+  trailerUrl: string;
+  trailerPath: string;
+  genres: {
+    id: number;
+    name: string;
+    description: string;
+  }[];
+}
