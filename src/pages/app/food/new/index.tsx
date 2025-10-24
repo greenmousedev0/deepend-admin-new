@@ -119,7 +119,6 @@ export default function index() {
           render={({ field }) => {
             return (
               <>
-                {field.value}{" "}
                 <SimpleSelect
                   label="Category"
                   value={field.value}
