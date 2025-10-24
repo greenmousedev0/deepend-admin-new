@@ -192,13 +192,13 @@ function HotelRoomCard({
 
   return (
     <div key={room.id} className=" bg-base-100 shadow-xl overflow-hidden">
-      <figure className="h-48 w-full rounded-md">
+      {/*<figure className="h-48 w-full rounded-md">
         <img
           src={"https://picsum.photos/400/225"}
           alt={room.name}
           className="w-full h-full object-cover rounded-t-md"
         />
-      </figure>
+      </figure>*/}
       <div className="  p-4">
         <h3 className=" text-lg font-bold mb-2">{room.name}</h3>
         <p className="text-base-content  text-xs text-opacity-80 mb-4 flex-grow">
