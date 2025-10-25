@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import type { PropsWithChildren } from "react";
 import HeaderBar from "../HeaderBar";
+import { LogOut, Settings } from "lucide-react";
+import { useLogout } from "@/helpers/auth";
 const dash_links: {
   path: string;
   label: string;
@@ -84,6 +86,7 @@ const dash_links: {
   // },
 ];
 export default function AppLayout(props: PropsWithChildren) {
+  const { logout } = useLogout();
   return (
     <div className="h-screen flex flex-col">
       <div className="drawer lg:drawer-open">
@@ -116,8 +119,8 @@ export default function AppLayout(props: PropsWithChildren) {
                 Deepend <div>entertainment</div>
               </div>*/}
             </div>
-            <div className="flex-1 overflow-y-auto">
-              <ul className="menu min-h-full space-y-2 w-72 p-4">
+            <div className="flex-1  overflow-y-auto">
+              <ul className="menu  min-h-full space-y-2 w-72 p-4">
                 {/* Sidebar content here */}
                 {dash_links.map((link) =>
                   link.type === "menu" ? (
@@ -139,6 +142,17 @@ export default function AppLayout(props: PropsWithChildren) {
                     </li>
                   ),
                 )}
+                <li className="mt-auto">
+                  <a>
+                    {" "}
+                    <Settings /> Settings
+                  </a>
+                </li>
+                <li className="">
+                  <a onClick={() => logout()}>
+                    <LogOut /> Logout
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
