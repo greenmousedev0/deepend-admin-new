@@ -43,6 +43,13 @@ const app = createRoute({
     createLazyRoute("/app")({ component: m.default }),
   ),
 );
+const appvr = createRoute({ getParentRoute: () => app, path: "vr" });
+const appvrindex = createRoute({ getParentRoute: () => appvr, path: "/" }).lazy(
+  () =>
+    import("./pages/app/vr/index").then((m) =>
+      createLazyRoute("/app/vr")({ component: m.default }),
+    ),
+);
 const appusers = createRoute({ getParentRoute: () => app, path: "users" });
 const appusersindex = createRoute({
   getParentRoute: () => appusers,
@@ -278,6 +285,18 @@ const appfoodideditindex = createRoute({
     createLazyRoute("/app/food/$id/edit")({ component: m.default }),
   ),
 );
+const appequipment = createRoute({
+  getParentRoute: () => app,
+  path: "equipment",
+});
+const appequipmentindex = createRoute({
+  getParentRoute: () => appequipment,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/equipment/index").then((m) =>
+    createLazyRoute("/app/equipment")({ component: m.default }),
+  ),
+);
 const appcinema = createRoute({ getParentRoute: () => app, path: "cinema" });
 const appcinemamovies = createRoute({
   getParentRoute: () => appcinema,
@@ -337,6 +356,7 @@ const index = createRoute({
 const config = root.addChildren([
   auth.addChildren([authlogin.addChildren([authloginindex])]),
   app.addChildren([
+    appvr.addChildren([appvrindex]),
     appusers.addChildren([appusersindex]),
     appstudio.addChildren([
       appstudioindex,
@@ -378,6 +398,7 @@ const config = root.addChildren([
         appfoodidedit.addChildren([appfoodideditindex]),
       ]),
     ]),
+    appequipment.addChildren([appequipmentindex]),
     appcinema.addChildren([
       appcinemamovies.addChildren([appcinemamoviesindex]),
       appcinemaindex,

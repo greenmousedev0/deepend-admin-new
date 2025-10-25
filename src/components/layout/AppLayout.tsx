@@ -64,6 +64,18 @@ const dash_links: {
       { path: "/app/cinema/movies", label: "All Movies" },
     ],
   },
+  {
+    path: "/app/vr",
+    label: "VR Games Ticket",
+    children: [],
+    type: "menu",
+  },
+  {
+    path: "/app/equipment",
+    label: "Equipment Renting",
+    children: [],
+    type: "menu",
+  },
   // {
   //   path: "/app/movie-cinema",
   //   label: "Movie Cinemas",
