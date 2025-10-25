@@ -61,7 +61,7 @@ const dash_links: {
     children: [
       { path: "/app/cinema", label: "All Cinemas" },
       { path: "/app/cinema/halls", label: "All Halls" },
-      { path: "/app/movies", label: "All Movies" },
+      { path: "/app/cinema/movies", label: "All Movies" },
     ],
   },
   // {

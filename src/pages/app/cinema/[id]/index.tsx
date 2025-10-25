@@ -3,9 +3,13 @@ import type { Cinema } from "@/api/types";
 import FieldSet from "@/components/FieldSet";
 import SimpleHeader from "@/components/SimpleHeader";
 import PageLoader from "@/components/skeleton/PageLoader";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
 import Halls from "../_components/Halls";
+import { VideoIcon } from "lucide-react";
+import { useModal } from "@/store/modals";
+import Modal from "@/components/dialogs-modals/SimpleModal";
+import SimpleInput from "@/components/SimpleInput";
 
 export default function index() {
   const { id } = useParams({
@@ -13,7 +17,10 @@ export default function index() {
   });
   const query = useQuery<ApiResponse<Cinema[]>>({
     queryKey: ["cinema-details", id],
-    queryFn: async () => (await apiClient.get("admins/cinemas/" + id)).data,
+    queryFn: async () => {
+      let resp = await apiClient.get("admins/cinemas/" + id);
+      return resp.data;
+    },
   });
 
   if (query.isLoading) {
@@ -25,12 +32,12 @@ export default function index() {
     <>
       <SimpleHeader title="Cinema Details" />
       <div className="p-4 space-y-4">
-        <h2 className="text-2xl">{item.name}</h2>
+        <h2 className="text-2xl flex gap-2 items-center">
+          <VideoIcon size={32}></VideoIcon>
+          <span>{item.name}</span>
+        </h2>
         <FieldSet title="Location">
           <div className="">
-            <label htmlFor="" className="fieldset-label">
-              Address
-            </label>
             <p>
               {item.address}
               {/*{item.city}
