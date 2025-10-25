@@ -32,7 +32,7 @@ export default function index() {
   });
   return (
     <div className="hero min-h-screen bg-base-200 flex">
-      <div className="flex-1 grid place-items-center  ">
+      <div className="flex-1 grid place-items-center m-4 md:m-0 ">
         <form
           onSubmit={form.handleSubmit(onsubmit)}
           action=""
