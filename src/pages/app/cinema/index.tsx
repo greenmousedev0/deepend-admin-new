@@ -5,6 +5,7 @@ import SimpleLoader from "@/components/SimpleLoader";
 import SimplePaginator from "@/components/SimplePaginator";
 import { usePagination } from "@/store/pagination";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
 
 export default function index() {
   const props = usePagination();
@@ -33,7 +34,8 @@ export default function index() {
       <SimpleHeader title={"Cinemas"} />
       <div className="flex flex-col gap-2 ">
         {items.map((item) => (
-          <div
+          <Link
+            to={`/app/cinema/${item.id}`}
             key={item.id}
             className="card card-compact bg-base-100 shadow-xl"
           >
@@ -43,7 +45,7 @@ export default function index() {
                 {item.address}, {item.city}, {item.state}
               </p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       <div className=" mt-4">
