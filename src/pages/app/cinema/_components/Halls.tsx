@@ -85,7 +85,7 @@ export default function Halls({ cinemaID }) {
             );
           })}
         >
-          <h2>Add Hall</h2>
+          <h2 className="text-2xl font-bold">Add Hall</h2>
           <SimpleInput
             {...form.register("name")}
             label="Name"
