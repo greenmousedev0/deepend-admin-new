@@ -15,7 +15,7 @@ import {
 
 const stats = [
   {
-    title: "Total Revenue",
+    title: "Users",
     color: "#a16207",
     icon: <Users className="h-4 w-4 text-muted-foreground" />,
     subtitle: "+20.1% from last month",
