@@ -14,7 +14,11 @@ export default function SimpleSelect<T>(props: SimpleSelect<T>) {
   const query = useQuery<ApiResponse>({
     queryKey: ["select", props.route],
     queryFn: async () => {
-      const response = await apiClient.get(`${props.route}`);
+      const response = await apiClient.get(`${props.route}`, {
+        params: {
+          limit: 50,
+        },
+      });
       return response.data;
     },
   });

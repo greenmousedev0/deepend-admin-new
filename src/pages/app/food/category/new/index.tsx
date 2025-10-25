@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { uploadToCloudinary } from "@/api/cloud";
 import { useState } from "react";
+import SimpleTextArea from "@/components/SimpleTextArea";
 
 interface NewFoodCategoryProps {
   name: string;
@@ -100,7 +101,7 @@ export default function index() {
           />
         </div>
 
-        <SimpleInput label="Description" {...register("description")} />
+        <SimpleTextArea label="Description" {...register("description")} />
         <button disabled={isPending} className="btn btn-block btn-primary">
           Create Food Category
         </button>
