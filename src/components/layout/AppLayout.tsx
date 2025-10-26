@@ -97,8 +97,19 @@ const dash_links: {
   {
     path: "/app/vr",
     label: "VR Games Ticket",
-    children: [],
-    type: "menu",
+    children: [
+      {
+        path: "/app/vr/games",
+        label: "All Games",
+        icon: Gamepad2,
+      },
+      {
+        path: "/app/vr/categories",
+        label: "Games Categories",
+        icon: Gamepad2,
+      },
+    ],
+    type: "submenu",
     icon: Gamepad2,
   },
   {

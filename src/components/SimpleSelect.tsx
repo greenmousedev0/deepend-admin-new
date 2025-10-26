@@ -11,6 +11,7 @@ interface SimpleSelect<T> extends PropsWithChildren {
 }
 
 export default function SimpleSelect<T>(props: SimpleSelect<T>) {
+  const [internalValue, setInternalValue] = useState(props.value);
   const query = useQuery<ApiResponse>({
     queryKey: ["select", props.route],
     queryFn: async () => {
@@ -23,13 +24,23 @@ export default function SimpleSelect<T>(props: SimpleSelect<T>) {
     },
   });
 
-  const label = props.label || "Select";
+  useEffect(() => {
+    if (internalValue !== props.value) {
+      if (props.onChange) {
+        props.onChange(internalValue);
+      }
+    }
+  }, [internalValue]);
+
+  const label = props.label;
   if (query.isLoading)
     return (
       <div className="w-full">
-        <label htmlFor="" className="mb-2 fieldset-label">
-          {label}
-        </label>
+        {label && (
+          <label htmlFor="" className="mb-2 fieldset-label">
+            {label}
+          </label>
+        )}
         <select disabled name="" className="select w-full" id="">
           <option value="">Loading</option>
         </select>
@@ -39,9 +50,11 @@ export default function SimpleSelect<T>(props: SimpleSelect<T>) {
   if (query.isError)
     return (
       <div className="w-full ">
-        <label htmlFor="" className="mb-2 fieldset-label">
-          {label}
-        </label>
+        {label && (
+          <label htmlFor="" className="mb-2 fieldset-label">
+            {label}
+          </label>
+        )}
         <select disabled name="" className="select w-full" id="">
           <option value="">Error loading options</option>
         </select>
@@ -52,18 +65,23 @@ export default function SimpleSelect<T>(props: SimpleSelect<T>) {
 
   return (
     <div className="w-full">
-      <label htmlFor="" className="mb-2 fieldset-label">
-        {label}
-      </label>
+      {label && (
+        <label htmlFor="" className="mb-2 fieldset-label">
+          {label}
+        </label>
+      )}
       <select
-        value={props.value}
+        value={internalValue}
         onChange={(e) => {
           // console.log(e.target.value);
-          props.onChange(e.target.value);
+          setInternalValue(e.target.value);
         }}
         className="select w-full"
       >
         {items.map((item, idx) => props.render(item))}
+        <>
+          <option value="null">All </option>
+        </>
       </select>
     </div>
   );

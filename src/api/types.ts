@@ -192,3 +192,41 @@ export interface MovieCinema {
     description: string;
   }[];
 }
+
+export interface Vrgame {
+  id: string;
+  name: string;
+  description: string;
+  categoryId: number;
+  imageUrls: {
+    url: string;
+    path: string;
+  }[];
+  ageRating: number;
+  ticketPrice: string;
+  ticketQuantity: number;
+  isAvailable: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface RentalEquipment {
+  id: string;
+  name: string;
+  description: string;
+  imageUrls: {
+    url: string;
+    path: string;
+  }[];
+  rentalPricePerDay: string;
+  address: string;
+  quantityAvailable: number;
+  isAvailable: boolean;
+  category: {
+    id: number;
+    name: string;
+    description: string;
+    icon: string;
+    iconPath: string;
+  };
+}
