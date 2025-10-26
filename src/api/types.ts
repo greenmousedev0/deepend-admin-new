@@ -230,3 +230,19 @@ export interface RentalEquipment {
     iconPath: string;
   };
 }
+
+export interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password?: string;
+  countryId: number;
+  phone: string;
+  address: string;
+  role: string;
+  emailVerified: boolean;
+  refreshToken?: string;
+  createdAt: string;
+  updatedAt: string;
+}
