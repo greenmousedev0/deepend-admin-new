@@ -12,14 +12,19 @@ export default function UpdateImages({
   setNew,
   setPrev,
 }: UpdateImagesProps) {
-  const [prevImages, setPrevImages] =
-    useState<{ url: string; path: string }[]>(images);
+  const [prevImages, setPrevImages] = useState<{ url: string; path: string }[]>(
+    images || [],
+  );
   const [newImages, setNewImages] = useState<FileList | []>([]);
   useEffect(() => {
-    setNew(newImages);
+    if (newImages.length > 0) {
+      setNew(newImages);
+    }
   }, [newImages]);
   useEffect(() => {
-    setPrev(prevImages);
+    if (prevImages.length > 0) {
+      setPrev(prevImages);
+    }
   }, [prevImages]);
 
   const removeNewImage = (indexToRemove: number) => {
@@ -59,26 +64,27 @@ export default function UpdateImages({
             <span>Upload Image</span>
           </label>
         </div>
-        {prevImages.map((image, index) => (
-          <div key={image.path} className="relative h-40 w-full">
-            <button
-              type="button"
-              className="btn btn-circle btn-error absolute right-0 top-0 m-2 z-10"
-              onClick={() => {
-                setPrevImages((prev) =>
-                  prev.filter((img) => img.path !== image.path),
-                );
-              }}
-            >
-              <XCircle />
-            </button>
-            <img
-              className="size-full object-cover rounded-lg"
-              src={image.url}
-              alt={`Existing image ${index + 1}`}
-            />
-          </div>
-        ))}
+        {prevImages.length > 0 &&
+          prevImages.map((image, index) => (
+            <div key={image.path} className="relative h-40 w-full">
+              <button
+                type="button"
+                className="btn btn-circle btn-error absolute right-0 top-0 m-2 z-10"
+                onClick={() => {
+                  setPrevImages((prev) =>
+                    prev.filter((img) => img.path !== image.path),
+                  );
+                }}
+              >
+                <XCircle />
+              </button>
+              <img
+                className="size-full object-cover rounded-lg"
+                src={image.url}
+                alt={`Existing image ${index + 1}`}
+              />
+            </div>
+          ))}
 
         {newImages &&
           Array.from(newImages).map((image, index) => (
