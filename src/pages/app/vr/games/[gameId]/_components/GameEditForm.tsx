@@ -10,7 +10,6 @@ import { useImages } from "@/helpers/images";
 import { useMutation } from "@tanstack/react-query";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
-
 export default function GameEditForm({ item }: { item: Vrgame }) {
   const { register, handleSubmit, control, reset } = useForm({
     defaultValues: item,

@@ -18,7 +18,17 @@ export default function index() {
     },
   });
   return (
-    <QueryPageLayout query={query} title={"VR Games"}>
+    <QueryPageLayout
+      query={query}
+      title={"VR Games"}
+      headerActions={
+        <>
+          <Link to="new" className="btn btn-primary">
+            Add New Game
+          </Link>
+        </>
+      }
+    >
       <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-2">
         {query.data?.payload.map((game) => (
           <div
