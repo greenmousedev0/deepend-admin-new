@@ -44,6 +44,18 @@ const app = createRoute({
   ),
 );
 const appvr = createRoute({ getParentRoute: () => app, path: "vr" });
+const appvrpurchases = createRoute({
+  getParentRoute: () => appvr,
+  path: "purchases",
+});
+const appvrpurchasesindex = createRoute({
+  getParentRoute: () => appvrpurchases,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/vr/purchases/index").then((m) =>
+    createLazyRoute("/app/vr/purchases")({ component: m.default }),
+  ),
+);
 const appvrindex = createRoute({ getParentRoute: () => appvr, path: "/" }).lazy(
   () =>
     import("./pages/app/vr/index").then((m) =>
@@ -414,6 +426,7 @@ const config = root.addChildren([
   auth.addChildren([authlogin.addChildren([authloginindex])]),
   app.addChildren([
     appvr.addChildren([
+      appvrpurchases.addChildren([appvrpurchasesindex]),
       appvrindex,
       appvrgames.addChildren([
         appvrgamesnew.addChildren([appvrgamesnewindex]),

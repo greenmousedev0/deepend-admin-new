@@ -187,6 +187,9 @@ export const StudioCard = ({
               id: studio.id,
             }}
           ></Link>
+          <Link to={"/app/studio/" + studio.id} className="btn btn-accent">
+            View Availability
+          </Link>
           <button
             className="btn btn-info"
             onClick={() => {
@@ -207,7 +210,7 @@ export const StudioCard = ({
             }}
             disabled={delete_mutation.isPending}
           >
-            Delete Studio
+            Delete
           </button>
         </div>
       </div>

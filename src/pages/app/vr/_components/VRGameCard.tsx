@@ -64,6 +64,7 @@ export default function VRGameCard({
                     <Menu></Menu>
                   </div>
                   <ul
+                    //@ts-ignore
                     tabIndex="-1"
                     className="dropdown-content ring ring-current/20 menu bg-base-100 rounded-box z-90 w-52 p-2 shadow-sm"
                   >
