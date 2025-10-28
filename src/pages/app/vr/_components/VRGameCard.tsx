@@ -55,7 +55,7 @@ export default function VRGameCard({
             </div>
             <div className="flex items-center gap-2">
               <div>
-                <div className="dropdown dropdown-top dropdown-center">
+                <div className="dropdown dropdown-top dropdown-end">
                   <div
                     tabIndex={0}
                     role="button"
