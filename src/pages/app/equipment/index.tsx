@@ -72,8 +72,10 @@ export default function index() {
             </figure>
             <div className="flex flex-col justify-between">
               <div>
-                <div className="flex justify-between items-center mb-2">
-                  <h2 className="card-title text-lg">{itm.name}</h2>
+                <div className="space-y-4 mb-2">
+                  <div className="flex justify-between items-center ">
+                    <h2 className="card-title text-lg">{itm.name}</h2>
+                  </div>
                   {itm.isAvailable ? (
                     <div className="badge badge-success badge-outline badge-sm">
                       Available

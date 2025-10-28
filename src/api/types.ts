@@ -246,3 +246,11 @@ export interface User {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface EquipmentCategory {
+  id: string;
+  name: string;
+  description: string;
+  iconPath: string;
+  icon: string;
+}
