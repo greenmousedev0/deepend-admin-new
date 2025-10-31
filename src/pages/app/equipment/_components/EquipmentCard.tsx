@@ -4,7 +4,13 @@ import { extract_message } from "@/helpers/auth";
 import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 
-export default function EquipmentCard({ itm }: { itm: RentalEquipment }) {
+export default function EquipmentCard({
+  itm,
+  refetch,
+}: {
+  itm: RentalEquipment;
+  refetch: () => any;
+}) {
   return (
     <div className="card w-full  bg-base-100 shadow-xl p-4 flex flex-col gap-4">
       <figure className="w-full h-[200px]">
@@ -60,17 +66,18 @@ export default function EquipmentCard({ itm }: { itm: RentalEquipment }) {
         </div>
         <div className="card-actions justify-end mt-3">
           <button
-            className="btn btn-error"
+            className="btn btn-error btn-sm"
             onClick={() => {
               toast.promise(
                 async () => {
                   let resp = await apiClient.delete(
-                    `/api/v1/admins/equipments/${itm.id}`,
+                    `admins/equipments/${itm.id}`,
                   );
+                  refetch();
                   return resp.data;
                 },
                 {
-                  loading: "Deleting...",
+                  loading: "Deleting..." + itm.name,
                   success: extract_message,
                   error: extract_message,
                 },
@@ -80,7 +87,7 @@ export default function EquipmentCard({ itm }: { itm: RentalEquipment }) {
             Delete
           </button>
           <Link
-            className="btn btn-primary btn-xs"
+            className="btn btn-primary btn-sm"
             to={`/app/equipment/${itm.id}`}
           >
             View Details
