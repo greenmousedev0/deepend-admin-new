@@ -32,7 +32,7 @@ export default function EquipmentCard({
         <div>
           <div className="space-y-4 mb-2">
             <div className="flex justify-between items-center ">
-              <h2 className="card-title text-lg">{itm.name}</h2>
+              <h2 className="card-title text-lg line-clamp-2">{itm.name}</h2>
             </div>
             {itm.isAvailable ? (
               <div className="badge badge-success badge-outline badge-sm">
@@ -65,6 +65,12 @@ export default function EquipmentCard({
           </div>
         </div>
         <div className="card-actions justify-end mt-3">
+          <Link
+            to={`/app/equipment/${itm.id}/edit`}
+            className="btn btn-accent btn-sm"
+          >
+            Edit
+          </Link>
           <button
             className="btn btn-error btn-sm"
             onClick={() => {
