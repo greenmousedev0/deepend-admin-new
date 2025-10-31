@@ -86,10 +86,7 @@ export default function EquipmentCard({
           >
             Delete
           </button>
-          <Link
-            className="btn btn-primary btn-sm"
-            to={`/app/equipment/${itm.id}`}
-          >
+          <Link className="btn btn-info btn-sm" to={`/app/equipment/${itm.id}`}>
             View Details
           </Link>
         </div>
