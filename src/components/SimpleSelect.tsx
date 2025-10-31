@@ -7,7 +7,7 @@ interface SimpleSelect<T> extends PropsWithChildren {
   value: any;
   onChange: (value: string) => void;
   label?: string;
-  render: (item: T) => any;
+  render: (item: T, index: number) => any;
 }
 
 export default function SimpleSelect<T>(props: SimpleSelect<T>) {
