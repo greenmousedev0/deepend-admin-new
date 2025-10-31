@@ -128,6 +128,15 @@ const appusersindex = createRoute({
     createLazyRoute("/app/users")({ component: m.default }),
   ),
 );
+const appusersid = createRoute({ getParentRoute: () => appusers, path: "$id" });
+const appusersidindex = createRoute({
+  getParentRoute: () => appusersid,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/users/[id]/index").then((m) =>
+    createLazyRoute("/app/users/$id")({ component: m.default }),
+  ),
+);
 const appstudio = createRoute({ getParentRoute: () => app, path: "studio" });
 const appstudioindex = createRoute({
   getParentRoute: () => appstudio,
@@ -358,6 +367,18 @@ const appequipment = createRoute({
   getParentRoute: () => app,
   path: "equipment",
 });
+const appequipmentnew = createRoute({
+  getParentRoute: () => appequipment,
+  path: "new",
+});
+const appequipmentnewindex = createRoute({
+  getParentRoute: () => appequipmentnew,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/equipment/new/index").then((m) =>
+    createLazyRoute("/app/equipment/new")({ component: m.default }),
+  ),
+);
 const appequipmentindex = createRoute({
   getParentRoute: () => appequipment,
   path: "/",
@@ -376,6 +397,18 @@ const appequipmentcategoriesindex = createRoute({
 }).lazy(() =>
   import("./pages/app/equipment/categories/index").then((m) =>
     createLazyRoute("/app/equipment/categories")({ component: m.default }),
+  ),
+);
+const appequipmentid = createRoute({
+  getParentRoute: () => appequipment,
+  path: "$id",
+});
+const appequipmentidindex = createRoute({
+  getParentRoute: () => appequipmentid,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/equipment/[id]/index").then((m) =>
+    createLazyRoute("/app/equipment/$id")({ component: m.default }),
   ),
 );
 const appcinema = createRoute({ getParentRoute: () => app, path: "cinema" });
@@ -450,7 +483,10 @@ const config = root.addChildren([
       ]),
       appvrcategories.addChildren([appvrcategoriesindex]),
     ]),
-    appusers.addChildren([appusersindex]),
+    appusers.addChildren([
+      appusersindex,
+      appusersid.addChildren([appusersidindex]),
+    ]),
     appstudio.addChildren([
       appstudioindex,
       appstudioall.addChildren([appstudioallindex]),
@@ -492,8 +528,10 @@ const config = root.addChildren([
       ]),
     ]),
     appequipment.addChildren([
+      appequipmentnew.addChildren([appequipmentnewindex]),
       appequipmentindex,
       appequipmentcategories.addChildren([appequipmentcategoriesindex]),
+      appequipmentid.addChildren([appequipmentidindex]),
     ]),
     appcinema.addChildren([
       appcinemamovies.addChildren([appcinemamoviesindex]),

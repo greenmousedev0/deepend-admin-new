@@ -19,6 +19,7 @@ import {
   Ticket,
   Clapperboard,
   Tv,
+  Hammer,
 } from "lucide-react";
 import { useLogout } from "@/helpers/auth";
 const dash_links: {
@@ -115,9 +116,20 @@ const dash_links: {
   {
     path: "/app/equipment",
     label: "Equipment Renting",
-    children: [],
-    type: "menu",
-    icon: ToolCase,
+    children: [
+      {
+        path: "/app/equipment",
+        label: "Equipment Rentals",
+        icon: Hammer,
+      },
+      {
+        path: "/app/equipment/categories",
+        label: "Equipment Categories",
+        icon: ToolCase,
+      },
+    ],
+    type: "submenu",
+    icon: Hammer,
   },
   // {
   //   path: "/app/movie-cinema",
