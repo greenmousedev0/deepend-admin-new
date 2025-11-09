@@ -1,6 +1,7 @@
 import { Outlet } from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
+import { Suspense } from "react";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

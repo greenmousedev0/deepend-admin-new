@@ -137,6 +137,15 @@ const appusersidindex = createRoute({
     createLazyRoute("/app/users/$id")({ component: m.default }),
   ),
 );
+const apptest = createRoute({ getParentRoute: () => app, path: "test" });
+const apptestindex = createRoute({
+  getParentRoute: () => apptest,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/test/index").then((m) =>
+    createLazyRoute("/app/test")({ component: m.default }),
+  ),
+);
 const appstudio = createRoute({ getParentRoute: () => app, path: "studio" });
 const appstudioindex = createRoute({
   getParentRoute: () => appstudio,
@@ -468,6 +477,46 @@ const appcinemaidindex = createRoute({
     createLazyRoute("/app/cinema/$id")({ component: m.default }),
   ),
 );
+const appbookings = createRoute({
+  getParentRoute: () => app,
+  path: "bookings",
+});
+const appbookingsstudio = createRoute({
+  getParentRoute: () => appbookings,
+  path: "studio",
+});
+const appbookingsstudioindex = createRoute({
+  getParentRoute: () => appbookingsstudio,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/bookings/studio/index").then((m) =>
+    createLazyRoute("/app/bookings/studio")({ component: m.default }),
+  ),
+);
+const appbookingsmovies = createRoute({
+  getParentRoute: () => appbookings,
+  path: "movies",
+});
+const appbookingsmoviesindex = createRoute({
+  getParentRoute: () => appbookingsmovies,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/bookings/movies/index").then((m) =>
+    createLazyRoute("/app/bookings/movies")({ component: m.default }),
+  ),
+);
+const appbookingsequipment = createRoute({
+  getParentRoute: () => appbookings,
+  path: "equipment",
+});
+const appbookingsequipmentindex = createRoute({
+  getParentRoute: () => appbookingsequipment,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/bookings/equipment/index").then((m) =>
+    createLazyRoute("/app/bookings/equipment")({ component: m.default }),
+  ),
+);
 const index = createRoute({
   getParentRoute: () => root,
   path: "/",
@@ -499,6 +548,7 @@ const config = root.addChildren([
       appusersindex,
       appusersid.addChildren([appusersidindex]),
     ]),
+    apptest.addChildren([apptestindex]),
     appstudio.addChildren([
       appstudioindex,
       appstudioall.addChildren([appstudioallindex]),
@@ -553,6 +603,11 @@ const config = root.addChildren([
       appcinemaindex,
       appcinemahalls.addChildren([appcinemahallsindex]),
       appcinemaid.addChildren([appcinemaidindex]),
+    ]),
+    appbookings.addChildren([
+      appbookingsstudio.addChildren([appbookingsstudioindex]),
+      appbookingsmovies.addChildren([appbookingsmoviesindex]),
+      appbookingsequipment.addChildren([appbookingsequipmentindex]),
     ]),
   ]),
   index,

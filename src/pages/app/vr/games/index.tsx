@@ -1,16 +1,18 @@
-import apiClient from "@/api/apiClient";
+import apiClient, { type ApiResponse } from "@/api/apiClient";
 import QueryPageLayout from "@/components/layout/QueryPageLayout";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import type { Vrgame } from "@/api/types";
 import { Link } from "@tanstack/react-router";
 import { usePagination } from "@/store/pagination";
 import SimplePaginator from "@/components/SimplePaginator";
 import VRGameCard from "../_components/VRGameCard";
+import { Suspense } from "react";
+import SuspensePageLayout from "@/components/layout/SuspensePageLayout";
 
 export default function index() {
   const props = usePagination();
-  const query = useQuery<{ payload: Vrgame[] }>({
-    queryKey: ["vr", props.page],
+  const query = useSuspenseQuery<ApiResponse<Vrgame[]>>({
+    queryKey: ["vrs", props.page],
     queryFn: async () => {
       let resp = await apiClient.get("admins/vrgames", {
         params: { page: props.page },
@@ -18,8 +20,9 @@ export default function index() {
       return resp.data;
     },
   });
+
   return (
-    <QueryPageLayout
+    <SuspensePageLayout
       query={query}
       title={"VR Games"}
       headerActions={
@@ -31,13 +34,13 @@ export default function index() {
       }
     >
       <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-2">
-        {query.data?.payload.map((game) => (
+        {query.data.payload.map((game) => (
           <VRGameCard game={game} key={game.id} refetch={query.refetch} />
         ))}
       </div>
       <div className="mt-4">
         <SimplePaginator {...props} />
       </div>
-    </QueryPageLayout>
+    </SuspensePageLayout>
   );
 }

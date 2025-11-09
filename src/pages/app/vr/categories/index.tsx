@@ -3,7 +3,7 @@ import apiClient from "@/api/apiClient";
 import QueryPageLayout from "@/components/layout/QueryPageLayout";
 import SimplePaginator from "@/components/SimplePaginator";
 import { usePagination } from "@/store/pagination";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import VRCategoryCard from "./_component/VRCategoryCard";
 import { useModal } from "@/store/modals";
 import Modal from "@/components/dialogs-modals/SimpleModal";
@@ -13,7 +13,7 @@ import SimpleInput from "@/components/SimpleInput";
 
 export default function index() {
   const props = usePagination();
-  const query = useQuery<ApiResponse>({
+  const query = useSuspenseQuery<ApiResponse>({
     queryKey: ["vr-categories", props.page],
     queryFn: async () => {
       let resp = await apiClient.get("admins/vrgames/categories", {
@@ -32,6 +32,7 @@ export default function index() {
       query.refetch();
     },
   });
+
   const { register, handleSubmit } = useForm();
   const modal = useModal();
   return (
@@ -71,7 +72,7 @@ export default function index() {
         </form>
       </Modal>
       <ul className="space-y-4">
-        {query.data?.payload.map((item, index) => {
+        {query.data.payload.map((item, index) => {
           return (
             <VRCategoryCard item={item} key={index} refetch={query.refetch} />
           );

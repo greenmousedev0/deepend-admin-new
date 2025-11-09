@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import type { PropsWithChildren } from "react";
+import { Suspense, type PropsWithChildren } from "react";
 import HeaderBar from "../HeaderBar";
 import {
   LogOut,
@@ -22,6 +22,7 @@ import {
   Hammer,
 } from "lucide-react";
 import { useLogout } from "@/helpers/auth";
+import SimpleLoader from "../SimpleLoader";
 const dash_links: {
   path: string;
   label: string;
@@ -152,7 +153,7 @@ export default function AppLayout(props: PropsWithChildren) {
             Open drawer
           </label>*/}
           <main className="p-6 flex-1 bg-base-200 overflow-y-auto border-l border-t border-current/20">
-            {props.children}
+            <Suspense fallback={<SimpleLoader />}>{props.children}</Suspense>
           </main>
         </div>
         <div className="drawer-side ">
