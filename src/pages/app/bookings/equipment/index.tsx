@@ -8,7 +8,7 @@ export default function index() {
   const query = useSuspenseQuery<ApiResponse<any>>({
     queryKey: ["studio-bookings", selected],
     queryFn: async () => {
-      let resp = await apiClient.get("admins/equipments/bookings", {
+      let resp = await apiClient.get("admins/equipmentsss/bookings", {
         params: {
           status: selected,
         },
