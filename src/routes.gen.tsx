@@ -179,6 +179,38 @@ const appstudioidindex = createRoute({
     createLazyRoute("/app/studio/$id")({ component: m.default }),
   ),
 );
+const appsettings = createRoute({
+  getParentRoute: () => app,
+  path: "settings",
+}).lazy(() =>
+  import("./pages/app/settings/_layout").then((m) =>
+    createLazyRoute("/app/settings")({ component: m.default }),
+  ),
+);
+const appsettingsdelivery = createRoute({
+  getParentRoute: () => appsettings,
+  path: "delivery",
+});
+const appsettingsdeliverynew = createRoute({
+  getParentRoute: () => appsettingsdelivery,
+  path: "new",
+});
+const appsettingsdeliverynewindex = createRoute({
+  getParentRoute: () => appsettingsdeliverynew,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/settings/delivery/new/index").then((m) =>
+    createLazyRoute("/app/settings/delivery/new")({ component: m.default }),
+  ),
+);
+const appsettingsdeliveryindex = createRoute({
+  getParentRoute: () => appsettingsdelivery,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/settings/delivery/index").then((m) =>
+    createLazyRoute("/app/settings/delivery")({ component: m.default }),
+  ),
+);
 const appindex = createRoute({ getParentRoute: () => app, path: "/" }).lazy(
   () =>
     import("./pages/app/index").then((m) =>
@@ -517,6 +549,19 @@ const appbookingsequipmentindex = createRoute({
     createLazyRoute("/app/bookings/equipment")({ component: m.default }),
   ),
 );
+const appadvert = createRoute({ getParentRoute: () => app, path: "advert" });
+const appadvertbanners = createRoute({
+  getParentRoute: () => appadvert,
+  path: "banners",
+});
+const appadvertbannersindex = createRoute({
+  getParentRoute: () => appadvertbanners,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/advert/banners/index").then((m) =>
+    createLazyRoute("/app/advert/banners")({ component: m.default }),
+  ),
+);
 const index = createRoute({
   getParentRoute: () => root,
   path: "/",
@@ -553,6 +598,12 @@ const config = root.addChildren([
       appstudioindex,
       appstudioall.addChildren([appstudioallindex]),
       appstudioid.addChildren([appstudioidindex]),
+    ]),
+    appsettings.addChildren([
+      appsettingsdelivery.addChildren([
+        appsettingsdeliverynew.addChildren([appsettingsdeliverynewindex]),
+        appsettingsdeliveryindex,
+      ]),
     ]),
     appindex,
     apphotel.addChildren([
@@ -608,6 +659,9 @@ const config = root.addChildren([
       appbookingsstudio.addChildren([appbookingsstudioindex]),
       appbookingsmovies.addChildren([appbookingsmoviesindex]),
       appbookingsequipment.addChildren([appbookingsequipmentindex]),
+    ]),
+    appadvert.addChildren([
+      appadvertbanners.addChildren([appadvertbannersindex]),
     ]),
   ]),
   index,

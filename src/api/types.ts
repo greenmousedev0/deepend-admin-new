@@ -264,3 +264,26 @@ export interface Dashstats {
   studioSubscribersTotal: number;
   foodSubscribersTotal: number;
 }
+
+export interface DeliverySettings {
+  id: number;
+  pricePerKm: string;
+  originLat: string;
+  originLng: string;
+  // [key: string]: any;
+  // createdAt: "2025-11-12T00:07:04.000Z";
+  // updatedAt: "2025-11-12T00:07:04.000Z";
+}
+
+export interface AdvertBanner {
+  id: number;
+  name: string;
+  imageUrls: {
+    url: string;
+    path: string;
+  }[];
+  linkUrl: string;
+  isPublished: boolean;
+  createdAt: string;
+  updatedAt: string;
+}

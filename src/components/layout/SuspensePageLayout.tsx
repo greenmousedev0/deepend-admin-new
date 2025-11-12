@@ -12,13 +12,17 @@ interface QueryPageLayoutProps {
   title?: string | JSX.Element;
   headerActions?: React.ReactNode | any;
   children?: React.ReactNode | ((data: any) => React.ReactNode);
+  showTitle?: boolean;
 }
 
 export default function SuspensePageLayout(props: QueryPageLayoutProps) {
+  const { showTitle = true } = props;
   if (props.query.isLoading)
     return (
       <>
-        <SimpleHeader title={props.title}>{props.headerActions}</SimpleHeader>
+        {showTitle && (
+          <SimpleHeader title={props.title}>{props.headerActions}</SimpleHeader>
+        )}
         <SimpleLoader />
       </>
     );
@@ -27,7 +31,9 @@ export default function SuspensePageLayout(props: QueryPageLayoutProps) {
     const error = extract_message(props.query.error as AxiosError<ApiResponse>);
     return (
       <>
-        <SimpleHeader title={props.title}>{props.headerActions}</SimpleHeader>
+        {showTitle && (
+          <SimpleHeader title={props.title}>{props.headerActions}</SimpleHeader>
+        )}
         <div className="p-4 min-h-[520px] grid place-items-center bg-base-300 rounded-md">
           <div className="p-4 space-y-4 ">
             <div className="text-lg text-center fieldset-label font-bold floating-label  wrap-anywhere">
@@ -48,9 +54,9 @@ export default function SuspensePageLayout(props: QueryPageLayoutProps) {
   if (props.query.isSuccess || props.query.data)
     return (
       <>
-        <SimpleHeader title={props.title || "Result"}>
-          {props.headerActions}
-        </SimpleHeader>
+        {showTitle && (
+          <SimpleHeader title={props.title}>{props.headerActions}</SimpleHeader>
+        )}
         <div className="mt-4 min-h-[520px]">
           {/*//@ts-ignore*/}
           {props.children && typeof props.children === "function"

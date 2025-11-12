@@ -1,3 +1,6 @@
+import apiClient, { type ApiResponse } from "@/api/apiClient";
+import type { Dashstats } from "@/api/types";
+import { useQuery } from "@tanstack/react-query";
 import {
   LineChart,
   Line,
@@ -192,6 +195,14 @@ const renderLegend = (props: any) => {
   );
 };
 export default function Example() {
+  const query = useQuery<ApiResponse<Dashstats>>({
+    queryKey: ["dash-stats"],
+    queryFn: async () => {
+      let resp = await apiClient.get("admins/dashboard/stats");
+      return resp.data;
+    },
+  });
+
   return (
     <div className=" card h-full bg-base-100 shadow-xl p-4 space-y-2 ring rounded-md ring-current/20">
       <h2 className="card-title text-2xl font-bold">Subscription Analysis</h2>
