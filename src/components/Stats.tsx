@@ -1,78 +1,94 @@
+import apiClient, { type ApiResponse } from "@/api/apiClient";
+import type { Dashstats } from "@/api/types";
 import type { StatCardProps } from "@/components/StatCard";
 import StatCard from "@/components/StatCard";
+import { useQuery } from "@tanstack/react-query";
 import {
-  Activity,
-  CreditCard,
-  DollarSign,
   Users,
-  ShoppingCart,
-  BarChart,
-  TrendingUp,
-  Clock,
   ForkKnifeCrossedIcon,
   Verified,
+  Hotel,
+  Ticket,
+  Gamepad2,
+  Wrench,
+  MonitorPlay,
 } from "lucide-react";
 
-const stats = [
-  {
-    title: "Users",
-    color: "#a16207",
-    icon: <Users className="h-4 w-4 text-muted-foreground" />,
-    subtitle: "+20.1% from last month",
-    main: "$45,231.89",
-  },
-  {
-    title: "Subscriptions",
-    color: "brown",
-    icon: <Verified className="h-4 w-4 text-muted-foreground" />,
-    subtitle: "+180.1% from last month",
-    main: "+2350",
-  },
-  {
-    title: "Food",
-    color: "green",
-    icon: <ForkKnifeCrossedIcon className="h-4 w-4 text-muted-foreground" />,
-    subtitle: "+19% from last month",
-    main: "+12,234",
-  },
-  {
-    title: "Studio Rating",
-    color: "#c2410c",
-    icon: <Activity className="h-4 w-4 text-muted-foreground" />,
-    subtitle: "+201 since last hour",
-    main: "+573",
-  },
-  {
-    title: "Hotel Bookings",
-    color: "#0e7490",
-    icon: <ShoppingCart className="h-4 w-4 text-muted-foreground" />,
-    subtitle: "+15% from last month",
-    main: "1,234",
-  },
-  {
-    title: "Cinema Tickets",
-    color: "mediumpurple",
-    icon: <BarChart className="h-4 w-4 text-muted-foreground" />,
-    subtitle: "+10% from last month",
-    main: "56,789",
-  },
-  {
-    title: "VR Game Tickets",
-    color: "blue",
-    icon: <TrendingUp className="h-4 w-4 text-muted-foreground" />,
-    subtitle: "+2.5% from last month",
-    main: "4.5%",
-  },
-  {
-    title: "Equipment Rating",
-    color: "brown",
-    icon: <Clock className="h-4 w-4 text-muted-foreground" />,
-    subtitle: "+5% from last month",
-    main: "00:05:30",
-  },
-] satisfies StatCardProps[];
-
 export default function Stats() {
+  const { data, isLoading } = useQuery<ApiResponse<Dashstats>>({
+    queryKey: ["dash-stats"],
+    queryFn: async () => {
+      let resp = await apiClient.get("admins/dashboard/stats");
+      return resp.data;
+    },
+  });
+
+  const dashstats = data?.payload;
+
+  const stats: StatCardProps[] = [
+    {
+      title: "Total Users",
+      color: "#a16207",
+      icon: <Users className="h-4 w-4 text-muted-foreground" />,
+      subtitle: "Total registered users",
+      main: isLoading ? "..." : (dashstats?.userTotal.toLocaleString() ?? "0"),
+    },
+    {
+      title: "Food Subscribers",
+      color: "green",
+      icon: <ForkKnifeCrossedIcon className="h-4 w-4 text-muted-foreground" />,
+      subtitle: "Users subscribed to food service",
+      main: isLoading
+        ? "..."
+        : (dashstats?.foodSubscribersTotal.toLocaleString() ?? "0"),
+    },
+    {
+      title: "Hotel Subscribers",
+      color: "#0e7490",
+      icon: <Hotel className="h-4 w-4 text-muted-foreground" />,
+      subtitle: "Users subscribed to hotel service",
+      main: isLoading
+        ? "..."
+        : (dashstats?.hotelSubscribersTotal.toLocaleString() ?? "0"),
+    },
+    {
+      title: "Movie Subscribers",
+      color: "mediumpurple",
+      icon: <MonitorPlay className="h-4 w-4 text-muted-foreground" />,
+      subtitle: "Users subscribed to movie service",
+      main: isLoading
+        ? "..."
+        : (dashstats?.movieSubscribersTotal.toLocaleString() ?? "0"),
+    },
+    {
+      title: "VR Game Subscribers",
+      color: "blue",
+      icon: <Gamepad2 className="h-4 w-4 text-muted-foreground" />,
+      subtitle: "Users subscribed to VR game service",
+      main: isLoading
+        ? "..."
+        : (dashstats?.vrgameSubscribersTotal.toLocaleString() ?? "0"),
+    },
+    {
+      title: "Equipment Subscribers",
+      color: "brown",
+      icon: <Wrench className="h-4 w-4 text-muted-foreground" />,
+      subtitle: "Users subscribed to equipment rental",
+      main: isLoading
+        ? "..."
+        : (dashstats?.equipmentSubscribersTotal.toLocaleString() ?? "0"),
+    },
+    {
+      title: "Studio Subscribers",
+      color: "#c2410c",
+      icon: <Ticket className="h-4 w-4 text-muted-foreground" />,
+      subtitle: "Users subscribed to studio booking",
+      main: isLoading
+        ? "..."
+        : (dashstats?.studioSubscribersTotal.toLocaleString() ?? "0"),
+    },
+  ];
+
   return (
     <div>
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">

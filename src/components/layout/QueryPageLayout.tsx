@@ -10,7 +10,7 @@ import type React from "react";
 
 interface QueryPageLayoutProps extends PropsWithChildren {
   query: QueryObserverResult;
-  title: string | JSX.Element;
+  title?: string | JSX.Element;
   headerActions?: React.ReactNode | any;
 }
 
@@ -30,7 +30,9 @@ export default function QueryPageLayout(props: QueryPageLayoutProps) {
         <SimpleHeader title={props.title}>{props.headerActions}</SimpleHeader>
         <div className="p-4 h-[520px] grid place-items-center bg-base-300 rounded-md">
           <div className="p-4 space-y-4 ">
-            <div className="text-xl font-bold floating-label">{error}</div>
+            <div className="text-lg text-center fieldset-label font-bold floating-label  wrap-anywhere">
+              {error}
+            </div>
             <button
               className="btn btn-error btn-block"
               onClick={() => props.query.refetch()}

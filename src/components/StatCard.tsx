@@ -11,20 +11,20 @@ export interface StatCardProps {
 export default function StatCard(props: StatCardProps) {
   return (
     <div
-      className="flex flex-col sm:flex-row gap-2 p-4 rounded-md bg-base-200 shadow-xl"
+      className={`flex flex-col gap-2 p-4 rounded-md shadow-xl bg-current/50`}
       style={{
         background: props.color,
       }}
     >
-      <div className="flex-1 flex flex-col">
-        <h2 className="text-xl text-wrap break-words mb-2 font-bold md:mb-0">
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl text-wrap break-words font-bold">
           {props.title}
         </h2>
-        <h2>{props.main}</h2>
-        <p>{props.subtitle}</p>
+        <div className="flex-none *:size-12">{props.icon}</div>
       </div>
-      <div className="sm:flex-none sm:max-w-[50px] grid place-items-center *:size-12">
-        {props.icon}
+      <div className="flex-1 flex flex-col">
+        <h2 className="text-3xl font-bold">{props.main}</h2>
+        <p className="fieldset-label font-bold">{props.subtitle}</p>
       </div>
     </div>
   );

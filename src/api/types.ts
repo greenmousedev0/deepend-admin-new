@@ -254,3 +254,13 @@ export interface EquipmentCategory {
   iconPath: string;
   icon: string;
 }
+
+export interface Dashstats {
+  userTotal: number;
+  vrgameSubscribersTotal: number;
+  movieSubscribersTotal: number;
+  equipmentSubscribersTotal: number;
+  hotelSubscribersTotal: number;
+  studioSubscribersTotal: number;
+  foodSubscribersTotal: number;
+}

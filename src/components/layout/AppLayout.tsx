@@ -20,6 +20,7 @@ import {
   Clapperboard,
   Tv,
   Hammer,
+  CalendarDays, // Changed from Calendar to CalendarDays
 } from "lucide-react";
 import { useLogout } from "@/helpers/auth";
 import SimpleLoader from "../SimpleLoader";
@@ -132,12 +133,29 @@ const dash_links: {
     type: "submenu",
     icon: Hammer,
   },
-  // {
-  //   path: "/app/movie-cinema",
-  //   label: "Movie Cinemas",
-  //   type: "submenu",
-  //   children: [{ path: "/app/movie-cinema", label: "All Movie Cinemas" }],
-  // },
+  {
+    path: "/app/bookings",
+    label: "Bookings",
+    children: [
+      {
+        path: "/app/bookings/equipment",
+        label: "Equipment Bookings",
+        icon: CalendarDays, // Changed from Calendar to CalendarDays
+      },
+      {
+        path: "/app/bookings/movies",
+        label: "Movie Bookings",
+        icon: Film, // Changed from ToolCase to Film for movie bookings
+      },
+      {
+        path: "/app/bookings/studio",
+        label: "Studio Bookings",
+        icon: MonitorPlay, // Changed from ToolCase to MonitorPlay for studio bookings
+      },
+    ],
+    type: "submenu",
+    icon: CalendarDays, // Changed from Calendar to CalendarDays
+  },
 ];
 export default function AppLayout(props: PropsWithChildren) {
   const { logout } = useLogout();

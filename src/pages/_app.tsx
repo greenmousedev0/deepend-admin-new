@@ -6,7 +6,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 1,
-      throwOnError: false,
+      // throwOnError: false,
     },
   },
 });
