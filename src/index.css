@@ -47,4 +47,8 @@
   flex: 0 0 100%;
   min-width: 0;
 }
-@
+
+.lucide {
+  height: 1rem;
+  width: 1rem;
+}

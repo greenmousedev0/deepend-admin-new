@@ -7,6 +7,13 @@ import { extract_message } from "@/helpers/auth";
 import { usePagination } from "@/store/pagination";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
+import {
+  MoreVertical,
+  Pencil,
+  ToggleLeft,
+  ToggleRight,
+  Trash2,
+} from "lucide-react";
 
 export default function index() {
   const props = usePagination();
@@ -101,6 +108,7 @@ function Banner(banner: AdvertBanner) {
               role="button"
               className="btn btn-primary btn-sm"
             >
+              <MoreVertical size={20} />
               Actions
             </button>
             <ul
@@ -116,14 +124,28 @@ function Banner(banner: AdvertBanner) {
                   });
                 }}
               >
-                <a>{banner.isPublished ? "Unpublish" : "Publish"}</a>
+                <a
+                  className={
+                    banner.isPublished ? "text-warning" : "text-success"
+                  }
+                >
+                  {banner.isPublished ? (
+                    <ToggleLeft size={20} />
+                  ) : (
+                    <ToggleRight size={20} />
+                  )}
+                  {banner.isPublished ? "Unpublish" : "Publish"}
+                </a>
               </li>
               <li
                 onClick={() => {
                   toast.info("Work In Progress");
                 }}
               >
-                <a>Edit</a>
+                <a className="text-info">
+                  <Pencil />
+                  Edit
+                </a>
               </li>
               <li
                 onClick={() => {
@@ -134,7 +156,10 @@ function Banner(banner: AdvertBanner) {
                   });
                 }}
               >
-                <a>Delete</a>
+                <a className="text-error">
+                  <Trash2 size={20} />
+                  Delete
+                </a>
               </li>
             </ul>
           </div>
