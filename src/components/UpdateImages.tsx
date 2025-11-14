@@ -19,13 +19,13 @@ export default function UpdateImages({
   useEffect(() => {
     if (newImages.length > 0) {
       setNew(newImages);
+    } else {
+      setNew([]); // Ensure setNew is called with an empty array if newImages becomes empty
     }
-  }, [newImages]);
+  }, [newImages, setNew]);
   useEffect(() => {
-    if (prevImages.length > 0) {
-      setPrev(prevImages);
-    }
-  }, [prevImages]);
+    setPrev(prevImages); // Always call setPrev with the current prevImages
+  }, [prevImages, setPrev]);
 
   const removeNewImage = (indexToRemove: number) => {
     if (newImages) {

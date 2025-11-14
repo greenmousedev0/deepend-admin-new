@@ -1,8 +1,11 @@
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import { Toaster } from "sonner";
+import { X } from "lucide-react"; // Import the X icon
 
 interface ModalProps {
   children: React.ReactNode;
+  action?: (item?: any) => any;
+  actionName?: string;
 }
 
 export interface ModalHandle {
@@ -10,34 +13,37 @@ export interface ModalHandle {
   close: () => void;
 }
 
-const Modal = forwardRef<ModalHandle, ModalProps>(({ children }, ref) => {
-  const modalRef = useRef<HTMLDialogElement>(null);
+const Modal = forwardRef<ModalHandle, ModalProps>(
+  ({ children, action, actionName }, ref) => {
+    const modalRef = useRef<HTMLDialogElement>(null);
 
-  useImperativeHandle(ref, () => ({
-    open: () => {
-      modalRef.current?.showModal();
-    },
-    close: () => {
-      modalRef.current?.close();
-    },
-  }));
+    useImperativeHandle(ref, () => ({
+      open: () => {
+        modalRef.current?.showModal();
+      },
+      close: () => {
+        modalRef.current?.close();
+      },
+    }));
 
-  return (
-    <dialog ref={modalRef} className="modal">
-      <Toaster theme="dark" richColors />
-      <div className="modal-box">
-        {children}
-        <div className="modal-action">
-          <form method="dialog">
-            <button className="btn" onClick={() => modalRef.current?.close()}>
-              Close
+    return (
+      <dialog ref={modalRef} className="modal">
+        <Toaster theme="dark" richColors />
+        <div className="modal-box max-w-2xl">
+          <form method="dialog" className="absolute right-4 top-4">
+            <button
+              className="btn btn-sm btn-circle btn-ghost"
+              onClick={() => modalRef.current?.close()}
+            >
+              <X size={20} />
             </button>
           </form>
+          {children}
         </div>
-      </div>
-    </dialog>
-  );
-});
+      </dialog>
+    );
+  },
+);
 
 Modal.displayName = "Modal";
 
