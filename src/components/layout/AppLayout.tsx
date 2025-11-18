@@ -20,7 +20,9 @@ import {
   Clapperboard,
   Tv,
   Hammer,
-  CalendarDays, // Changed from Calendar to CalendarDays
+  CalendarDays,
+  Hamburger,
+  ScreenShare, // Changed from Calendar to CalendarDays
 } from "lucide-react";
 import { useLogout } from "@/helpers/auth";
 import SimpleLoader from "../SimpleLoader";
@@ -92,10 +94,17 @@ const dash_links: {
     type: "submenu",
     icon: Film,
     children: [
-      { path: "/app/cinema", label: "All Cinemas", icon: Clapperboard },
-      { path: "/app/cinema/halls", label: "All Halls", icon: Building },
-      { path: "/app/cinema/movies", label: "All Movies", icon: Film },
+      { path: "/app/cinema", label: "Cinemas", icon: Clapperboard },
+      { path: "/app/cinema/halls", label: " Halls", icon: Building },
+      { path: "/app/cinema/movies", label: "Movies", icon: Film },
+      { path: "/app/cinema/movies/snacks", label: "Snacks", icon: Hamburger },
     ],
+  },
+  {
+    path: "/app/advert/banners",
+    label: "Adverts",
+    type: "menu",
+    icon: ScreenShare,
   },
   {
     path: "/app/vr",
