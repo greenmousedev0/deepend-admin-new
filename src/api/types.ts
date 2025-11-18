@@ -287,3 +287,37 @@ export interface AdvertBanner {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface MovieObject {
+  id: string;
+  cinemaId: string;
+  title: string;
+  description: string;
+  cast: string;
+  durationMinutes: number;
+  ageRating: number;
+  posterUrl: string;
+  posterPath: string;
+  trailerUrl: string;
+  trailerPath: string;
+  createdAt: string;
+  updatedAt: string;
+  genres: {
+    id: number;
+    name: string;
+    description: string;
+  }[];
+}
+
+export interface Showtime {
+  id: number;
+  movieId: string;
+  cinemaHallId: string;
+  showtime: string;
+  showDate: string;
+  ticketPrice: string;
+  totalSeats: number;
+  isAvailable: boolean;
+  createdAt: string;
+  updatedAt: string;
+}

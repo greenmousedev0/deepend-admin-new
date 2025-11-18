@@ -1,8 +1,12 @@
 import type { MovieCinema } from "@/api/types";
+import { Link } from "@tanstack/react-router";
 
 export default function MovieCard({ item }: { item: MovieCinema }) {
   return (
-    <div className="card bg-base-100 shadow-xl h-full flex flex-col">
+    <Link
+      to={`/app/cinema/movies/${item.id}`}
+      className="card bg-base-100 shadow-xl h-full flex flex-col"
+    >
       <figure className="relative w-full h-64 overflow-hidden">
         <img
           src={item.posterUrl}
@@ -26,6 +30,6 @@ export default function MovieCard({ item }: { item: MovieCinema }) {
           ))}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
