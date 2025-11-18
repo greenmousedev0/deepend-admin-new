@@ -469,6 +469,18 @@ const appcinemamovies = createRoute({
   getParentRoute: () => appcinema,
   path: "movies",
 });
+const appcinemamoviessnacks = createRoute({
+  getParentRoute: () => appcinemamovies,
+  path: "snacks",
+});
+const appcinemamoviessnacksindex = createRoute({
+  getParentRoute: () => appcinemamoviessnacks,
+  path: "/",
+}).lazy(() =>
+  import("./pages/app/cinema/movies/snacks/index").then((m) =>
+    createLazyRoute("/app/cinema/movies/snacks")({ component: m.default }),
+  ),
+);
 const appcinemamoviesindex = createRoute({
   getParentRoute: () => appcinemamovies,
   path: "/",
@@ -650,7 +662,10 @@ const config = root.addChildren([
       ]),
     ]),
     appcinema.addChildren([
-      appcinemamovies.addChildren([appcinemamoviesindex]),
+      appcinemamovies.addChildren([
+        appcinemamoviessnacks.addChildren([appcinemamoviessnacksindex]),
+        appcinemamoviesindex,
+      ]),
       appcinemaindex,
       appcinemahalls.addChildren([appcinemahallsindex]),
       appcinemaid.addChildren([appcinemaidindex]),
